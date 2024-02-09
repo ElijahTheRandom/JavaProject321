@@ -1,0 +1,49 @@
+@startuml
+class Data{
+-Idenitifer
+-Content
+}
+
+class Tag{
+-Identifier
+-Sortable Ordinal
++rename()
+}
+
+class Database{
+-Tags[]
+-Data[]
+-Relationships[]
++createData()
++deleteData()
++createTag()
++deleteTag()
+}
+
+class Relationship{
+-Relationship(Data, Tag)
++returnTag()
++returnData()
++changeRelationship()
+}
+
+class Constraint{
+~comparaters()
+}
+
+class Solver{
++filter()
++sort()
+}
+
+Relationship --* Tag
+Relationship --* Data
+
+Database --o Relationship
+Database --o Data
+Database --o Solver
+Database --o Tag
+
+
+Solver --o Constraint
+@enduml
