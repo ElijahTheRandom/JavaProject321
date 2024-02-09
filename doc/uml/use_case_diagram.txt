@@ -1,0 +1,12 @@
+@startuml
+:User:
+(Import Data) as (UC1)
+(Create Tag) as (UC2)
+(Create Relationship) as (UC3)
+(Search via Constraint) as (UC4)
+
+User --> UC1
+User --> UC2
+User --> UC3
+User --> UC4
+@enduml
