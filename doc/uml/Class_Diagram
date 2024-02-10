@@ -21,7 +21,8 @@ class Database{
 }
 
 class Relationship{
--Relationship(data_ptr, tag_ptr)
+-tag_ptr
+-data_ptr
 +returnTag()
 +returnData()
 }
