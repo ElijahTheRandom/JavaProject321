@@ -1,19 +1,19 @@
 @startuml
 class Data{
--Idenitifer
--Content
+-name
+-content
 }
 
 class Tag{
--Identifier
--Sortable Ordinal
+-identifier
+-sortableOrdinal
 +rename()
 }
 
 class Database{
--Tags[]
--Data[]
--Relationships[]
+-tags[]
+-data[]
+-relationships[]
 +createData()
 +deleteData()
 +createTag()
@@ -21,14 +21,13 @@ class Database{
 }
 
 class Relationship{
--Relationship(Data, Tag)
+-Relationship(data_ptr, tag_ptr)
 +returnTag()
 +returnData()
-+changeRelationship()
 }
 
 class Constraint{
-~comparaters()
++comparaters()
 }
 
 class Solver{
@@ -36,14 +35,15 @@ class Solver{
 +sort()
 }
 
-Relationship --* Tag
-Relationship --* Data
+Relationship *-- Tag
+Relationship *-- Data
+Relationship *-- Solver
 
-Database --o Relationship
-Database --o Data
-Database --o Solver
-Database --o Tag
+Database *-- Relationship
+Database *-- Data
+Database *-- Solver
+Database *-- Tag
 
 
-Solver --o Constraint
+Solver *-- Constraint
 @enduml
