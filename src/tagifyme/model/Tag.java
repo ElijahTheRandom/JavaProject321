@@ -18,9 +18,4 @@ public class Tag {
   public String getName() {
     return this.name;
   }
-
-  // At some point this might be useful for computing fast comparisons.
-  public int toHash() {
-    return name.hashCode();
-  }
 }
