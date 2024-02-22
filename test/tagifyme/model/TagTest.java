@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class TagTest {
     
+    private Tag t;
+    
     public TagTest() {
     }
     
@@ -30,6 +32,7 @@ public class TagTest {
     
     @BeforeEach
     public void setUp() {
+      t = new Tag("Test");
     }
     
     @AfterEach
@@ -42,26 +45,9 @@ public class TagTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        Tag instance = null;
-        String expResult = "";
+        Tag instance = t;
+        String expResult = "Test";
         String result = instance.getName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of toHash method, of class Tag.
-     */
-    @Test
-    public void testToHash() {
-        System.out.println("toHash");
-        Tag instance = null;
-        int expResult = 0;
-        int result = instance.toHash();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

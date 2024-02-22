@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author ethan
  */
 public class DataTest {
+
+    private Data d;
     
     public DataTest() {
     }
@@ -30,6 +32,7 @@ public class DataTest {
     
     @BeforeEach
     public void setUp() {
+      d = new Data("Test");
     }
     
     @AfterEach
@@ -42,26 +45,9 @@ public class DataTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        Data instance = null;
-        String expResult = "";
+        Data instance = d;
+        String expResult = "Test";
         String result = instance.getName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of getBuf method, of class Data.
-     */
-    @Test
-    public void testGetBuf() {
-        System.out.println("getBuf");
-        Data instance = null;
-        String expResult = "";
-        String result = instance.getBuf();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }
