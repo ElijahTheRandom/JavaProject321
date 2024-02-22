@@ -9,20 +9,11 @@ public class Data {
   /** The identifier of the piece of data. */
   private String name;
 
-  // Where buf is the underlying data associated with the
-  // type.
-  private String buf;
-
-  public Data(String name, String buf) {
+  public Data(String name) {
     this.name = name;
-    this.buf = buf;
   }
 
   public String getName() {
     return this.name;
-  }
-
-  public String getBuf() {
-    return this.buf;
   }
 }
