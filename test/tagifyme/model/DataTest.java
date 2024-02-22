@@ -4,12 +4,10 @@
  */
 package tagifyme.model;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -22,20 +20,12 @@ public class DataTest {
     public DataTest() {
     }
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
+    @Before
     public void setUp() {
       d = new Data("Test");
     }
     
-    @AfterEach
+    @After
     public void tearDown() {
     }
 
