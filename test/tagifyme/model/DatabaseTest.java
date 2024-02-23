@@ -15,7 +15,7 @@ import static org.junit.Assert.fail;
 
 /**
  *
- * @author ELIJAH
+ * @author ELIJAH SHANNON
  */
 public class DatabaseTest {
 
