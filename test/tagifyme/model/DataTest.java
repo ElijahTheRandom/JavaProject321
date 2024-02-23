@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  *
- * @author ethan
+ * @author Olivia
  */
 public class DataTest {
 
