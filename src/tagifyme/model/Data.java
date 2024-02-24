@@ -24,4 +24,26 @@ public class Data implements Comparable<Data> {
   public int compareTo(Data other) {
     return this.getName().compareTo(other.getName());
   }
+
+  // NOTE: Both of these Overrides are needed to have the Set functionality we
+  // require; a Data should be differentiated based upon its string indentifier,
+  // not its object. See the above compareTo.
+  
+  /**
+   * Return the hashCode for this object.
+   */
+  @Override
+  public int hashCode() {
+    return this.getName().hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null || obj.getClass() != this.getClass()) {
+      return false;
+    }
+
+    final Data other = (Data) obj;
+    return this.getName().equals(other.getName());
+  }
 }
