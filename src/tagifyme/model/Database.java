@@ -28,7 +28,7 @@ public class Database {
   }
   
   public void addTag(Tag t) {
-      // TODO: Add a tag to the databse.
+    this.tag_set.add(t);
   }
   
   public void deleteTag(Tag t) {
@@ -36,8 +36,8 @@ public class Database {
       // NOTE: this has to delete the accompanying relationships aswell.
   }
   
-  public void addData(Data dt) {
-      // TODO: Add data to the database.
+  public void addData(Data d) {
+    this.data_set.add(d);
   }
   
   // TODO: Does this take a Data (an object reference), or does it take
@@ -59,7 +59,6 @@ public class Database {
       // database.
   }
  
-
   public static Database loadDatabase() throws Exception {
     // TODO: Load a database from a file.
     throw new Exception("TODO");
