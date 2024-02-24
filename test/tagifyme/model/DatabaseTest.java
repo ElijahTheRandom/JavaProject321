@@ -16,16 +16,53 @@ import static org.junit.Assert.fail;
  * @author ethan
  */
 public class DatabaseTest {
+
+    private Database db;
     
     public DatabaseTest() {
+
     }
     
     @Before
     public void setUp() {
+      // Before each test, we setup the database with some data.
+      Tag t1 = new Tag("t1");
+      Tag t2 = new Tag("t2");
+
+      Data d1 = new Data("d1");
+      Data d2 = new Data("d2");
+
+      Relationship r1 = new Relationship(d1, t1);
+      Relationship r2 = new Relationship(d2, t2);
+      
+      // At this point, we need to create the database.
+      // TODO: Do we wrap the above in Lists and feed them in via
+      // constructor? Do we call `.addTag`, etc. repeatedly here?
+      db = new Database();
     }
     
     @After
     public void tearDown() {
+    }
+
+    /**
+     * Test deleting a tag.
+     */
+    @Test
+    public void deleteTag() {
+       Database instance = this.db;
+       // TODO: What does t1 need to be here? Is it an `object` (we then
+       // need something to prove equivalency between objects), or is it
+       // an index into a list. See the note above the corresponding function
+       // in the model definition.
+       
+       // this.db.deleteTag(t1);
+     
+       // After this, we need to check and make sure that 
+       // A) The tag no longer exists in the database.
+       // B) That the relationships that had such tag have been removed aswell.
+       // TODO: Implement the above requirements.
+       fail("This test case is a prototype");
     }
 
     /**
