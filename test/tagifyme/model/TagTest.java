@@ -16,14 +16,14 @@ import static org.junit.Assert.fail;
  */
 public class TagTest {
     
-    private Tag t;
+    private Tag tag;
     
     public TagTest() {
     }
     
     @Before
     public void setUp() {
-      t = new Tag("Test");
+      tag = new Tag("Test");
     }
     
     @After
@@ -36,9 +36,29 @@ public class TagTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        Tag instance = t;
+        Tag instance = tag;
         String expResult = "Test";
         String result = instance.getName();
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of compareTo method, of class Tag.
+     */
+    @Test
+    public void testCompareTo() {
+      System.out.println("compareTo");
+      Tag instance = tag;
+
+      // A tag compared to itself is the same.
+      assertEquals(true, instance.compareTo(instance) == 0);
+
+      // A tag compared to a tag beginning with 'U' is smaller.
+      Tag compare_1 = new Tag("Uest");
+      assertEquals(false, instance.compareTo(compare_1) > 1);
+
+      // A tag compared to a tag beginning with 'R' is larger.
+      Tag compare_2 = new Tag("Rest");
+      assertEquals(true, instance.compareTo(compare_2) > 1);
     }
 }
