@@ -1,24 +1,30 @@
 package tagifyme.model;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 // TODO: Abstract this later with inheritance, etc.
 public class Database {
 
-  // TODO: These are lists at this point, but there's cases where we don't want
-  // to add duplicate tags within the database, etc. There's the case where
-  // we potentially want these ordered to allow for faster searching.
-  // Select some type, and then figure it out later.
-  private List<Data> data_list;
-  private List<Tag> tag_list;
-  private List<Relationship> relationship_list;
+  // Each of these are Sets to avoid duplication.
+  private Set<Data> data_set;
+  private Set<Tag> tag_set;
+  private Set<Relationship> relationship_set;
 
   public Database() {
-    // See the above TODO.
-    this.data_list = new ArrayList<Data>();
-    this.tag_list = new ArrayList<Tag>();
-    this.relationship_list = new ArrayList<Relationship>();
+    this.data_set = new HashSet<Data>();
+    this.tag_set  = new HashSet<Tag>();
+    this.relationship_set = new HashSet<Relationship>();
+  }
+
+  /**
+   * Alternative constructor that allows for pre-computed data, tag, relationship
+   * parameters.
+   */
+  public Database(HashSet<Data> d, HashSet<Tag> t, HashSet<Relationship> r) {
+    this.data_set = d;
+    this.tag_set = t;
+    this.relationship_set = r;
   }
   
   public void addTag(Tag t) {
