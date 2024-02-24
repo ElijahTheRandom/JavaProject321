@@ -15,14 +15,14 @@ import static org.junit.Assert.assertEquals;
  */
 public class DataTest {
 
-    private Data d;
+    private Data data;
     
     public DataTest() {
     }
     
     @Before
     public void setUp() {
-      d = new Data("Test");
+      data = new Data("Test");
     }
     
     @After
@@ -35,9 +35,29 @@ public class DataTest {
     @Test
     public void testGetName() {
         System.out.println("getName");
-        Data instance = d;
+        Data instance = data;
         String expResult = "Test";
         String result = instance.getName();
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of compareTo method, of class Data.
+     */
+    @Test
+    public void testCompareTo() {
+      System.out.println("compareTo");
+      Data instance = data;
+
+      // A data compared to itself is the same.
+      assertEquals(true, instance.compareTo(instance) == 0);
+
+      // A data compared to a data beginning with 'U' is smaller.
+      Data compare_1 = new Data("Uest");
+      assertEquals(false, instance.compareTo(compare_1) > 1);
+
+      // A data compared to a data beginning with 'R' is larger.
+      Data compare_2 = new Data("Rest");
+      assertEquals(true, instance.compareTo(compare_2) > 1);
     }
 }
