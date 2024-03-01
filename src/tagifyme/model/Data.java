@@ -5,9 +5,9 @@ package tagifyme.model;
 // stored within the class itself, but it's likely that we'd
 // like to point to objects on the network, the disk, whatever.
 
-public class Data {
+public class Data implements Comparable<Data> {
   /** The identifier of the piece of data. */
-  private String name;
+  private final String name;
 
   public Data(String name) {
     this.name = name;
@@ -15,5 +15,35 @@ public class Data {
 
   public String getName() {
     return this.name;
+  }
+
+  /**
+   * Compare this data to another via the Comparable interface.
+   */
+  @Override
+  public int compareTo(Data other) {
+    return this.getName().compareTo(other.getName());
+  }
+
+  // NOTE: Both of these Overrides are needed to have the Set functionality we
+  // require; a Data should be differentiated based upon its string indentifier,
+  // not its object. See the above compareTo.
+  
+  /**
+   * Return the hashCode for this object.
+   */
+  @Override
+  public int hashCode() {
+    return this.getName().hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null || obj.getClass() != this.getClass()) {
+      return false;
+    }
+
+    final Data other = (Data) obj;
+    return this.getName().equals(other.getName());
   }
 }
