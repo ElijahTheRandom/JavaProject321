@@ -89,47 +89,4 @@ public class DatabaseTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of getData method, of class Database.
-     */
-    @Test
-    public void testGetData() {
-        System.out.println("getData");
-        Database instance = new Database();
-        Iterator<Data> expResult = null;
-        Iterator<Data> result = instance.getData();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getTag method, of class Database.
-     */
-    @Test
-    public void testGetTag() {
-        System.out.println("getTag");
-        Database instance = new Database();
-        Iterator<Tag> expResult = null;
-        Iterator<Tag> result = instance.getTag();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getRelationship method, of class Database.
-     */
-    @Test
-    public void testGetRelationship() {
-        System.out.println("getRelationship");
-        Database instance = new Database();
-        Iterator<Relationship> expResult = null;
-        Iterator<Relationship> result = instance.getRelationship();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }
