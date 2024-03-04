@@ -5,20 +5,45 @@ package tagifyme.model;
 // stored within the class itself, but it's likely that we'd
 // like to point to objects on the network, the disk, whatever.
 
+/**
+ * Base class for "data" within the Database
+ * @author elijah
+ */
+
 public class Data implements Comparable<Data> {
   /** The identifier of the piece of data. */
   private final String name;
+  private final String PATH;
 
-  public Data(String name) {
+  /**
+   * 
+   * @param name String name of file
+   * @param PATH String PATH of file
+   */
+  public Data(String name, String PATH) {
     this.name = name;
+    this.PATH = PATH;
   }
 
+  /**
+   * 
+   * @return Returns the name
+   */
   public String getName() {
     return this.name;
+  }
+  
+  /**
+   * 
+   * @return Returns the PATH
+   */
+    public String getPATH() {
+    return this.PATH;
   }
 
   /**
    * Compare this data to another via the Comparable interface.
+     * @param other
    */
   @Override
   public int compareTo(Data other) {
@@ -36,7 +61,11 @@ public class Data implements Comparable<Data> {
   public int hashCode() {
     return this.getName().hashCode();
   }
-
+/**
+ * .equals() overload to compare data.
+ * @param obj
+ * @return 
+ */
   @Override
   public boolean equals(Object obj) {
     if (obj == null || obj.getClass() != this.getClass()) {

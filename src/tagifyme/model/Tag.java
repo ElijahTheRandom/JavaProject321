@@ -14,13 +14,17 @@ public class Tag implements Comparable<Tag> {
   public Tag(String name) {
     this.name = name;
   }
-
+/**
+ * 
+ * @return Returns name
+ */
   public String getName() {
     return this.name;
   }
 
   /**
    * Compare this tag to another via the Comparable interface.
+     * @param other
    */
   @Override
   public int compareTo(Tag other) {
@@ -38,7 +42,11 @@ public class Tag implements Comparable<Tag> {
   public int hashCode() {
     return this.getName().hashCode();
   }
-
+/**
+ * .equals() overload for comparing tags
+ * @param obj
+ * @return Boolean of tag equivalency  
+ */
   @Override
   public boolean equals(Object obj) {
     if (obj == null || obj.getClass() != this.getClass()) {
