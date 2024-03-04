@@ -43,7 +43,7 @@ public class Tag implements Comparable<Tag> {
     return this.getName().hashCode();
   }
 /**
- * = Operator overload for comparing tags
+ * .equals() overload for comparing tags
  * @param obj
  * @return Boolean of tag equivalency  
  */

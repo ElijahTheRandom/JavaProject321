@@ -62,7 +62,7 @@ public class Data implements Comparable<Data> {
     return this.getName().hashCode();
   }
 /**
- * = Operator overload to compare data.
+ * .equals() overload to compare data.
  * @param obj
  * @return 
  */
