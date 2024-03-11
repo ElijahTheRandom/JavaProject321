@@ -91,8 +91,17 @@ public class Database {
    * @param d Data to delete
    */
   public void deleteData(Data d) {
-      // TODO: Remove specific data from the database; NOTE, this should
-      // destroy the accompanying relationships within the database aswell.
+    this.data_set.remove(d); // Remove the data from the set.
+
+    // If we're deleting data, we need to delete the accompanying
+    // relationships.
+    for (Relationship r : this.relationship_set) {
+      if (r.getData().equals(d)) {
+        // TODO: If we're deleting data, what's the risk of modifying the underlying
+        // set we're iterating over?
+        this.relationship_set.remove(r);
+      }
+    }
   }
   
   /**
