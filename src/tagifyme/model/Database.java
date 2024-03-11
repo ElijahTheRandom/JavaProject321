@@ -61,8 +61,17 @@ public class Database {
    * @param t Tag to delete
    */
   public void deleteTag(Tag t) {
-      // TODO: Implementation to delete a tag from the database.
-      // NOTE: this has to delete the accompanying relationships aswell.
+    this.tag_set.remove(t); // Remove the tag from the set.
+
+    // If we're deleting a Tag, we need to delete the accompanying
+    // relationships.
+    for (Relationship r : this.relationship_set) {
+      if (r.getTag().equals(t)) {
+        // TODO: If we're deleting a tag, what's the risk of modifying the underlying
+        // set we're iterating over?
+        this.relationship_set.remove(r);
+      }
+    }
   }
   
   /**
