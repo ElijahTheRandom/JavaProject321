@@ -113,16 +113,12 @@ public class Database {
       // database.
   }
   
-  // TODO: Does this take a Relationship (an object reference), or does it
-  // take an index into the data type that stores the relationship?
-  // def should take an object reference  - elijah
   /**
    * Delete a relationship between a tag and data.
    * @param rel Relationship to delete
    */
-  public void deleteRelationship(Relationship rel) {
-      // TODO: Implementation to remove the specific relationship from the
-      // database.
+  public void deleteRelationship(Relationship r) {
+    this.relationship_set.remove(r);
   }
  
   /**
