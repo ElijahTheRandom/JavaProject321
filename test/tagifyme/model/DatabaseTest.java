@@ -4,7 +4,9 @@
  */
 package tagifyme.model;
 
-import java.util.Iterator;
+import java.util.Optional;
+import java.util.Arrays;
+import java.lang.Iterable;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -28,17 +30,25 @@ public class DatabaseTest {
       // Before each test, we setup the database with some data.
       Tag t1 = new Tag("t1");
       Tag t2 = new Tag("t2");
+      Tag[] t_arr = {t1, t2};
 
       Data d1 = new Data("d1");
       Data d2 = new Data("d2");
+      Data[] d_arr = {d1, d2};
 
       Relationship r1 = new Relationship(d1, t1);
       Relationship r2 = new Relationship(d2, t2);
-      
+      Relationship[] r_arr = {r1, r2};
+
+      Optional<Iterable<Data>> o_data = Optional.of(Arrays.asList(d_arr));
+      Optional<Iterable<Tag>> o_tag = Optional.of(Arrays.asList(t_arr));
+      Optional<Iterable<Relationship>> o_rel = Optional.of(Arrays.asList(r_arr));
+            
       // At this point, we need to create the database.
       // TODO: Do we wrap the above in Lists and feed them in via
       // constructor? Do we call `.addTag`, etc. repeatedly here?
-      db = new Database();
+
+      db = new Database(o_data, o_tag, o_rel);
     }
     
     @After
