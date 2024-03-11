@@ -108,9 +108,8 @@ public class Database {
    * Add a relationship between a tag and data.
    * @param rel new Relationship
    */
-  public void addRelationship(Relationship rel) {
-      // TODO: Implementation to add the specific relationship to the
-      // database.
+  public void addRelationship(Relationship r) {
+    this.relationship_set.add(r);
   }
   
   /**
