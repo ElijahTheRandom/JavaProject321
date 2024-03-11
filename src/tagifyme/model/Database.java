@@ -2,6 +2,8 @@ package tagifyme.model;
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Optional;
+import java.util.Iterable;
 
 // TODO: Abstract this later with inheritance, etc.
 
@@ -19,7 +21,7 @@ public class Database {
     /**
      *
      */
-    public Database() {
+  public Database() {
     this.data_set = new HashSet<Data>();
     this.tag_set  = new HashSet<Tag>();
     this.relationship_set = new HashSet<Relationship>();
@@ -36,6 +38,28 @@ public class Database {
     this.data_set = d;
     this.tag_set = t;
     this.relationship_set = r;
+  }
+
+  public Database(Optional<Iterable<Data>> dI, Optional<Iterable<Tag>> tI, Optional<Iterable<Relationship>> rI) {
+    this(); // Call the parameter-less constructor, initializing the sets.
+
+    if (dI.isPresent()) {
+      for (Data elem : dI.get()) {
+        this.data_set.add(elem);
+      }
+    }
+
+    if (tI.isPresent()) {
+      for (Tag elem : tI.get()) {
+        this.tag_set.add(elem);
+      }
+    }
+
+    if (rI.isPresent()) {
+      for (Relationship elem : rI.get()) {
+        this.relationship_set.add(elem);
+      }
+    }
   }
   
   /**
