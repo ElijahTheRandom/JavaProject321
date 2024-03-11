@@ -26,6 +26,14 @@ public class Data implements Comparable<Data> {
   }
 
   /**
+   * @param name String name of a file.
+   */
+  public Data(String name) {
+    this.name = name;
+    this.PATH = "Unspecified";
+  }
+
+  /**
    * 
    * @return Returns the name
    */
