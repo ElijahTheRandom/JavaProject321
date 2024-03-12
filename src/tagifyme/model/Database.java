@@ -3,7 +3,6 @@ package tagifyme.model;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.Iterable;
 
 // TODO: Abstract this later with inheritance, etc.
 
