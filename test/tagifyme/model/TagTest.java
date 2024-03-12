@@ -61,4 +61,27 @@ public class TagTest {
       Tag compare_2 = new Tag("Rest");
       assertEquals(true, instance.compareTo(compare_2) > 1);
     }
+
+    /**
+     * Test of equals method, of class Tag.
+     */
+    @Test
+    public void testEquals() {
+      System.out.println("equals");
+      Tag instance = tag;
+
+      // A tag compared to itself should return true.
+      assertEquals(true, instance.equals(instance));
+
+      // A tag compared to another Tag object with the same
+      // "name" should be true.
+      Tag sameName = new Tag("Test");
+      assertEquals(true, instance.equals(sameName));
+
+      // A tag compared to another Tag object with a different
+      // name should be false.
+      Tag diffName = new Tag("Diff");
+      assertEquals(false, instance.equals(diffName));
+    }
 }
+    
