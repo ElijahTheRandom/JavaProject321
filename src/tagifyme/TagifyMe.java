@@ -1,7 +1,10 @@
 package tagifyme;
 
+import tagifyme.view.TagifyMeGUI;
+
 public class TagifyMe {
   public static void main(String[] args) {
-    System.out.println("Hello World!");
+    TagifyMeGUI gui = new TagifyMeGUI();
+    gui.setVisible(true);
   }
 }
