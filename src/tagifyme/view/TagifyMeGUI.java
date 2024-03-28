@@ -4,6 +4,8 @@
  */
 package tagifyme.view;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author ethan
@@ -199,6 +201,34 @@ public class TagifyMeGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    
+    
+    //ADDING ACTION LISTENERS! These will be used by the controller
+    //to catch events (when button will be pressed)
+    public void addDataButton(ActionListener addData) {
+            jButton1.addActionListener(addData);
+    }
+    
+    public void addTagButton(ActionListener addTag) {
+            jButton2.addActionListener(addTag);
+    }
+    public void deleteDataButton(ActionListener deleteDataButton) {
+            jButton3.addActionListener(deleteDataButton);
+    }
+    public void deleteTagButton(ActionListener deleteTagButton) {
+            jButton4.addActionListener(deleteTagButton);
+    }
+    public void sortButton(ActionListener sortButton) {
+            jButton4.addActionListener(sortButton);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
