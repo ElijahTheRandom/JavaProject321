@@ -2,6 +2,7 @@ package tagifyme.model;
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Optional;
 
 // TODO: Abstract this later with inheritance, etc.
 
@@ -19,7 +20,7 @@ public class Database {
     /**
      *
      */
-    public Database() {
+  public Database() {
     this.data_set = new HashSet<Data>();
     this.tag_set  = new HashSet<Tag>();
     this.relationship_set = new HashSet<Relationship>();
@@ -36,6 +37,28 @@ public class Database {
     this.data_set = d;
     this.tag_set = t;
     this.relationship_set = r;
+  }
+
+  public Database(Optional<Iterable<Data>> dI, Optional<Iterable<Tag>> tI, Optional<Iterable<Relationship>> rI) {
+    this(); // Call the parameter-less constructor, initializing the sets.
+
+    if (dI.isPresent()) {
+      for (Data elem : dI.get()) {
+        this.data_set.add(elem);
+      }
+    }
+
+    if (tI.isPresent()) {
+      for (Tag elem : tI.get()) {
+        this.tag_set.add(elem);
+      }
+    }
+
+    if (rI.isPresent()) {
+      for (Relationship elem : rI.get()) {
+        this.relationship_set.add(elem);
+      }
+    }
   }
   
   /**
@@ -61,8 +84,17 @@ public class Database {
    * @param t Tag to delete
    */
   public void deleteTag(Tag t) {
-      // TODO: Implementation to delete a tag from the database.
-      // NOTE: this has to delete the accompanying relationships aswell.
+    this.tag_set.remove(t); // Remove the tag from the set.
+
+    // If we're deleting a Tag, we need to delete the accompanying
+    // relationships.
+    for (Relationship r : this.relationship_set) {
+      if (r.getTag().equals(t)) {
+        // TODO: If we're deleting a tag, what's the risk of modifying the underlying
+        // set we're iterating over?
+        this.relationship_set.remove(r);
+      }
+    }
   }
   
   /**
@@ -82,29 +114,33 @@ public class Database {
    * @param d Data to delete
    */
   public void deleteData(Data d) {
-      // TODO: Remove specific data from the database; NOTE, this should
-      // destroy the accompanying relationships within the database aswell.
+    this.data_set.remove(d); // Remove the data from the set.
+
+    // If we're deleting data, we need to delete the accompanying
+    // relationships.
+    for (Relationship r : this.relationship_set) {
+      if (r.getData().equals(d)) {
+        // TODO: If we're deleting data, what's the risk of modifying the underlying
+        // set we're iterating over?
+        this.relationship_set.remove(r);
+      }
+    }
   }
   
   /**
    * Add a relationship between a tag and data.
    * @param rel new Relationship
    */
-  public void addRelationship(Relationship rel) {
-      // TODO: Implementation to add the specific relationship to the
-      // database.
+  public void addRelationship(Relationship r) {
+    this.relationship_set.add(r);
   }
   
-  // TODO: Does this take a Relationship (an object reference), or does it
-  // take an index into the data type that stores the relationship?
-  // def should take an object reference  - elijah
   /**
    * Delete a relationship between a tag and data.
    * @param rel Relationship to delete
    */
-  public void deleteRelationship(Relationship rel) {
-      // TODO: Implementation to remove the specific relationship from the
-      // database.
+  public void deleteRelationship(Relationship r) {
+    this.relationship_set.remove(r);
   }
  
   /**
