@@ -1,4 +1,4 @@
-package dummy;
+package tagifyme.dummy;
 
 import tagifyme.model.Database;
 import tagifyme.model.Data;
