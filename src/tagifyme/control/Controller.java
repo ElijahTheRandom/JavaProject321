@@ -50,6 +50,10 @@ public class Controller {
                     theView.addData("Test", "Test2");
                     theModel.notifyObservers();
                 }
+                
+                if(command == "Delete Data"){
+                    theView.removeData("Test2");
+                }
 
             } catch (Exception exm) {
                 System.out.println(exm.getMessage());
