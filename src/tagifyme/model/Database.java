@@ -4,13 +4,15 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Optional;
 
+import tagifyme.subject
+
 // TODO: Abstract this later with inheritance, etc.
 
 /**
  * Base class of the Database
  * @author elijah
  */
-public class Database {
+public class Database implements Subject {
 
   // Each of these are Sets to avoid duplication.
   private Set<Data> data_set;
@@ -158,5 +160,13 @@ public class Database {
    */
   public void dumpDatabase() {
     // TODO: Write the database to disk.
+  }
+
+  public void addObserver(Observer observer) {
+    // TODO:
+  }
+
+  public void notifyObservers() {
+    // TODO:
   }
 }

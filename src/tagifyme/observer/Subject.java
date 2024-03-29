@@ -1,5 +1,5 @@
 // Files related to the observer pattern.
-package tagifyme.observer
+package tagifyme.observer;
 
 public interface Subject {
   // Add an observer to the list.
