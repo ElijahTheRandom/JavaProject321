@@ -7,11 +7,14 @@ package tagifyme.view;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
+import tagifyme.observer.Observer;
+import tagifyme.model.Data;
+
 /**
  *
  * @author ethan
  */
-public class TagifyMeGUI extends javax.swing.JFrame {
+public class TagifyMeGUI extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form TagifyMeGUI
@@ -228,13 +231,13 @@ public class TagifyMeGUI extends javax.swing.JFrame {
         Object[] row = {name, PATH};
         model.addRow(row);
     }
-    
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public void update(Iterable<Data> dI) {
+        for (Data dElem : dI) {
+            this.addData(dElem.getName(), dElem.getPATH());
+        }
+    }
     
     /**
      * @param args the command line arguments

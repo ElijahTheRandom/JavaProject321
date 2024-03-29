@@ -12,6 +12,7 @@ public class TagifyMe {
     // Comment this out for non-debug builds.
     // Database theModel = new Database();
     Database theModel = DummyData.init();
+    theModel.addObserver(theView);
     
     Controller theController = new Controller(theView, theModel);
     

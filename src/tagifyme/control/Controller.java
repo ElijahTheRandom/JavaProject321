@@ -48,6 +48,7 @@ public class Controller {
                 
                 if(command == "Add Data"){
                     theView.addData("Test", "Test2");
+                    theModel.notifyObservers();
                 }
 
             } catch (Exception exm) {
