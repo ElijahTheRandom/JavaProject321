@@ -1,5 +1,5 @@
 // Files related to the observer pattern.
-package tagifyme.observer
+package tagifyme.observer;
 
 public interface Observer {
   // TODO: What's the proper way to hande an Observer update for
