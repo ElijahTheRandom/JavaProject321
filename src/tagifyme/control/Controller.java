@@ -47,7 +47,14 @@ public class Controller {
                 command = e.getActionCommand();
                 
                 if(command == "Add Data"){
-                    theView.addData("Test", "Test2");
+                    theView.addData("Test", "Test2", "Test3");
+                    theView.addData("Test4", "Test5", "Test6");
+                    theView.addData("Test7", "Test8", "Test9");
+
+                }
+                
+                if(command == "Delete Data"){
+                    theView.removeData("Test2");
                 }
 
             } catch (Exception exm) {
