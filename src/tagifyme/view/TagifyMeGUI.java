@@ -5,6 +5,7 @@
 package tagifyme.view;
 
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -44,10 +45,7 @@ public class TagifyMeGUI extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Data", "PATH"
@@ -220,6 +218,15 @@ public class TagifyMeGUI extends javax.swing.JFrame {
     }
     public void sortButton(ActionListener sortButton) {
             jButton4.addActionListener(sortButton);
+    }
+    
+    
+    
+    
+    public void addData(String name, String PATH){
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Object[] row = {name, PATH};
+        model.addRow(row);
     }
     
     
