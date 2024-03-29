@@ -64,6 +64,7 @@ public class Controller {
                     String PATH = theView.getDataPATH();
                     theModel.addData(new Data(Name, PATH));
                     theView.addData(Name, PATH, "test");
+                    theView.hideAddDataDialogBox();
                 }
 
             } catch (Exception exm) {
