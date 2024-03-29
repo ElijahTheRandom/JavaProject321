@@ -4,7 +4,8 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Optional;
 
-import tagifyme.subject
+import tagifyme.observer.Subject;
+import tagifyme.observer.Observer;
 
 // TODO: Abstract this later with inheritance, etc.
 
