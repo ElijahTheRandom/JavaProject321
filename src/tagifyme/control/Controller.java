@@ -45,6 +45,10 @@ public class Controller {
             try {
                 // Get the JButton command
                 command = e.getActionCommand();
+                
+                if(command == "Add Data"){
+                    theView.addData("Test", "Test2");
+                }
 
             } catch (Exception exm) {
                 System.out.println(exm.getMessage());
