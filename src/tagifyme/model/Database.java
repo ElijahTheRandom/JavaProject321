@@ -3,6 +3,8 @@ package tagifyme.model;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import tagifyme.observer.Subject;
 import tagifyme.observer.Observer;
@@ -20,6 +22,8 @@ public class Database implements Subject {
   private Set<Tag> tag_set;
   private Set<Relationship> relationship_set;
 
+  private List<Observer> obs_list;
+
     /**
      *
      */
@@ -27,6 +31,7 @@ public class Database implements Subject {
     this.data_set = new HashSet<Data>();
     this.tag_set  = new HashSet<Tag>();
     this.relationship_set = new HashSet<Relationship>();
+    this.obs_list = new ArrayList<Observer>();
   }
 
   /**
@@ -163,11 +168,13 @@ public class Database implements Subject {
     // TODO: Write the database to disk.
   }
 
-  public void addObserver(Observer observer) {
-    // TODO:
+  public void addObserver(Observer obs) {
+      this.obs_list.add(obs);
   }
 
   public void notifyObservers() {
-    // TODO:
+    for (Observer obs: this.obs_list) {
+      obs.update(this.data_set);
+    }
   }
 }
