@@ -6,17 +6,23 @@ package tagifyme.view;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 
 import tagifyme.observer.Observer;
 import tagifyme.model.Data;
+import tagifyme.model.Tag;
+import tagifyme.model.solver.Pair;
+
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
  * @author ethan
  */
-public class TagifyMeGUI extends javax.swing.JFrame implements Observer {
+public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable<Pair<Data, Set<Tag>>>> {
 
     /**
      * Creates new form TagifyMeGUI
@@ -321,9 +327,20 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer {
     }
 
     @Override
-    public void update(Iterable<Data> dI) {
-        for (Data dElem : dI) {
-            this.addData(dElem.getName(), dElem.getPATH());
+    public void update(Iterable<Pair<Data, Set<Tag>>> dI) {
+        for (Pair<Data, Set<Tag>> dElem : dI) {
+            List<String> tagNames = new ArrayList();
+            for (Tag tElem : dElem.right()) {
+                tagNames.add(tElem.getName());
+            }
+            
+            String tName = "";
+            for (String tElem : tagNames) {
+                tName += tElem;
+                tName += ", ";
+            }
+            
+            this.addData(dElem.left().getName(), dElem.left().getPATH(), tName);
         }
     }
     

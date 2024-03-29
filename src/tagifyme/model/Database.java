@@ -9,6 +9,8 @@ import java.util.List;
 import tagifyme.observer.Subject;
 import tagifyme.observer.Observer;
 
+import tagifyme.model.solver.Pair;
+
 // TODO: Abstract this later with inheritance, etc.
 
 /**
@@ -172,9 +174,30 @@ public class Database implements Subject {
       this.obs_list.add(obs);
   }
 
+  // TODO: This function is absolutely miserable.
+  public Iterable<Pair<Data, Set<Tag>>> data_and_tags() {
+    List<Pair<Data, Set<Tag>>> r = new ArrayList();
+
+    for (Data d_elem: this.data_set) {
+      // find the set of tags associated with this element of
+      // data.
+      Set<Tag> tags = new HashSet();
+
+      for (Relationship r_elem : this.relationship_set) {
+        if (r_elem.getData().equals(d_elem)) {
+          tags.add(r_elem.getTag());
+        }
+      }
+
+      r.add(new Pair(d_elem, tags));
+    }
+
+    return r;
+  }
+
   public void notifyObservers() {
     for (Observer obs: this.obs_list) {
-      obs.update(this.data_set);
+      obs.update(this.data_and_tags());
     }
   }
 }

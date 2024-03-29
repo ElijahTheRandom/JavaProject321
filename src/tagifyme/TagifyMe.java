@@ -15,6 +15,7 @@ public class TagifyMe {
     theModel.addObserver(theView);
     
     Controller theController = new Controller(theView, theModel);
+    theModel.notifyObservers();
     
     theView.setVisible(true);
   }

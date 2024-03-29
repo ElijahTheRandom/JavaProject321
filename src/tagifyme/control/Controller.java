@@ -47,7 +47,6 @@ public class Controller {
                 command = e.getActionCommand();
                 
                 if(command == "Add Data"){
-                    theView.addData("Test", "Test2");
                     theModel.notifyObservers();
                 }
                 
