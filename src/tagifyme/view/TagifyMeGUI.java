@@ -90,31 +90,32 @@ public class TagifyMeGUI extends javax.swing.JFrame {
         jDialog2.getContentPane().setLayout(jDialog2Layout);
         jDialog2Layout.setHorizontalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog2Layout.createSequentialGroup()
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog2Layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDialog2Layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jButton6))
-                    .addGroup(jDialog2Layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jLabel2))
-                    .addGroup(jDialog2Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDialog2Layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jButton7)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addGap(157, 157, 157))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                        .addComponent(jButton7)
+                        .addGap(151, 151, 151))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                .addContainerGap(142, Short.MAX_VALUE)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(153, 153, 153))))
         );
         jDialog2Layout.setVerticalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
@@ -277,11 +278,12 @@ public class TagifyMeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
         JFileChooser fileChooser = new JFileChooser();
         int option = fileChooser.showOpenDialog(jDialog1);
         if(option == JFileChooser.APPROVE_OPTION){
-           File file = fileChooser.getSelectedFile();
-           jLabel1.setText("File Selected: " + file.getAbsolutePath());
+           file = fileChooser.getSelectedFile();
+           jLabel1.setText("File Selected: " + file.getName());
         }else{
            jLabel1.setText("Open command canceled");
         }
@@ -308,6 +310,11 @@ public class TagifyMeGUI extends javax.swing.JFrame {
             jButton4.addActionListener(sortButton);
     }
     
+    public void fileDialogButton(ActionListener fileDialogButton) {
+            jButton7.addActionListener(fileDialogButton);
+            
+    }
+    
     
     
     
@@ -325,9 +332,16 @@ public class TagifyMeGUI extends javax.swing.JFrame {
                 model.removeRow(i);
             }
         }
-
     }
-    
+
+    public String getDataPATH(){
+        String PATH = file.getAbsolutePath();
+        return PATH;
+    }
+    public String getDataName(){
+        String Name = jTextField2.getText();
+        return Name;
+    }
     
     
     
@@ -367,6 +381,7 @@ public class TagifyMeGUI extends javax.swing.JFrame {
         });
     }
 
+    private File file;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

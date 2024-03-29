@@ -5,6 +5,7 @@
 package tagifyme.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import tagifyme.model.Data;
 import tagifyme.view.TagifyMeGUI;
 import tagifyme.model.Database;
 /**
@@ -31,6 +32,7 @@ public class Controller {
         this.theView.deleteTagButton(new CalculateListener());
         this.theView.deleteDataButton(new CalculateListener());
         this.theView.sortButton(new CalculateListener());
+        this.theView.fileDialogButton(new CalculateListener());
 
     }
 
@@ -55,6 +57,13 @@ public class Controller {
                 
                 if(command == "Delete Data"){
                     theView.removeData("Test2");
+                }
+                
+                if(command == "Complete"){
+                    String Name = theView.getDataName();
+                    String PATH = theView.getDataPATH();
+                    theModel.addData(new Data(Name, PATH));
+                    theView.addData(Name, PATH, "test");
                 }
 
             } catch (Exception exm) {
