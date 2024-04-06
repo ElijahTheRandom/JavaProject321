@@ -33,6 +33,8 @@ public class Controller {
         this.theView.deleteDataButton(new CalculateListener());
         this.theView.sortButton(new CalculateListener());
         this.theView.fileDialogButton(new CalculateListener());
+        this.theView.confirmTagButton(new CalculateListener());
+
 
     }
 
@@ -49,6 +51,9 @@ public class Controller {
                 command = e.getActionCommand();
                 
                 if(command == "Add Data"){
+                    theView.showAddDataDialogBox();
+                    String[] myStrings = {"tag1", "tag2"};
+                    theView.populateTagList(myStrings);
                     theView.addData("Test", "Test2", "Test3");
                     theView.addData("Test4", "Test5", "Test6");
                     theView.addData("Test7", "Test8", "Test9");
@@ -65,6 +70,10 @@ public class Controller {
                     theModel.addData(new Data(Name, PATH));
                     theView.addData(Name, PATH, "test");
                     theView.hideAddDataDialogBox();
+                }
+                
+                if (command == "Add Tag"){
+                    
                 }
 
             } catch (Exception exm) {
