@@ -1,5 +1,7 @@
 package tagifyme.model;
 
+import java.io.Serializable;
+
 // TODO: At some point, this should change into an interface
 // or abstract class or something; at this point, the data is
 // stored within the class itself, but it's likely that we'd
@@ -10,7 +12,7 @@ package tagifyme.model;
  * @author elijah
  */
 
-public class Data implements Comparable<Data> {
+public class Data implements Comparable<Data>, Serializable {
   /** The identifier of the piece of data. */
   private final String name;
   private final String PATH;

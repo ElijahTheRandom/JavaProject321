@@ -1,10 +1,12 @@
 package tagifyme.model;
 
+import java.io.Serializable;
+
 /**
  * Base class for relationships within the database
  * @author elijah
  */
-public class Relationship {
+public class Relationship implements Serializable {
   private Data data_ref;
   private Tag tag_ref;
 

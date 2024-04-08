@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 import tagifyme.observer.Subject;
 import tagifyme.observer.Observer;
@@ -17,7 +18,7 @@ import tagifyme.model.solver.Pair;
  * Base class of the Database
  * @author elijah
  */
-public class Database implements Subject {
+public class Database implements Subject, Serializable {
 
   // Each of these are Sets to avoid duplication.
   private Set<Data> data_set;
