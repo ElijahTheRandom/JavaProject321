@@ -7,15 +7,24 @@ package tagifyme.view;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.DefaultListModel;
+import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
+
+import tagifyme.observer.Observer;
+import tagifyme.model.Data;
+import tagifyme.model.Tag;
+import tagifyme.model.solver.Pair;
+
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
  * @author ethan
  */
-public class TagifyMeGUI extends javax.swing.JFrame {
+public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable<Pair<Data, Set<Tag>>>> {
 
     /**
      * Creates new form TagifyMeGUI
@@ -381,6 +390,24 @@ public class TagifyMeGUI extends javax.swing.JFrame {
     public void confirmTagButton(ActionListener confirmTagButton){
             jButton8.addActionListener(confirmTagButton);
     }
+
+    @Override
+    public void update(Iterable<Pair<Data, Set<Tag>>> dI) {
+        for (Pair<Data, Set<Tag>> dElem : dI) {
+            List<String> tagNames = new ArrayList();
+            for (Tag tElem : dElem.right()) {
+                tagNames.add(tElem.getName());
+            }
+            
+            String tName = "";
+            for (String tElem : tagNames) {
+                tName += tElem;
+                tName += ", ";
+            }
+            
+            this.addData(dElem.left().getName(), dElem.left().getPATH(), tName);
+        }
+    }
     
     public void removeData(String PATH){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -423,8 +450,6 @@ public class TagifyMeGUI extends javax.swing.JFrame {
         jDialog2.setVisible(false);
     }
 //END ADD DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
-    
     
     /**
      * @param args the command line arguments

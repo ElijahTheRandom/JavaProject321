@@ -3,6 +3,14 @@ package tagifyme.model;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.Serializable;
+
+import tagifyme.observer.Subject;
+import tagifyme.observer.Observer;
+
+import tagifyme.model.solver.Pair;
 
 // TODO: Abstract this later with inheritance, etc.
 
@@ -10,12 +18,14 @@ import java.util.Optional;
  * Base class of the Database
  * @author elijah
  */
-public class Database {
+public class Database implements Subject, Serializable {
 
   // Each of these are Sets to avoid duplication.
   private Set<Data> data_set;
   private Set<Tag> tag_set;
   private Set<Relationship> relationship_set;
+
+  private List<Observer> obs_list;
 
     /**
      *
@@ -24,6 +34,7 @@ public class Database {
     this.data_set = new HashSet<Data>();
     this.tag_set  = new HashSet<Tag>();
     this.relationship_set = new HashSet<Relationship>();
+    this.obs_list = new ArrayList<Observer>();
   }
 
   /**
@@ -158,5 +169,36 @@ public class Database {
    */
   public void dumpDatabase() {
     // TODO: Write the database to disk.
+  }
+
+  public void addObserver(Observer obs) {
+      this.obs_list.add(obs);
+  }
+
+  // TODO: This function is absolutely miserable.
+  public Iterable<Pair<Data, Set<Tag>>> data_and_tags() {
+    List<Pair<Data, Set<Tag>>> r = new ArrayList();
+
+    for (Data d_elem: this.data_set) {
+      // find the set of tags associated with this element of
+      // data.
+      Set<Tag> tags = new HashSet();
+
+      for (Relationship r_elem : this.relationship_set) {
+        if (r_elem.getData().equals(d_elem)) {
+          tags.add(r_elem.getTag());
+        }
+      }
+
+      r.add(new Pair(d_elem, tags));
+    }
+
+    return r;
+  }
+
+  public void notifyObservers() {
+    for (Observer obs: this.obs_list) {
+      obs.update(this.data_and_tags());
+    }
   }
 }

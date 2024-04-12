@@ -1,10 +1,12 @@
 package tagifyme.model;
 
+import java.io.Serializable;
+
 /**
  * Base class for a "tag" within the database.
  * @author ethan
  */
-public class Tag implements Comparable<Tag> {
+public class Tag implements Comparable<Tag>, Serializable {
   private final String name;
 
 /**
