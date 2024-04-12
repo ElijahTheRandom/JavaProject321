@@ -480,22 +480,15 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     
     
     
-/*REMOVE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//REMOVE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public String deleteSelectedData(){
         int selectedRowIndex = jTable1.getSelectedRow();
-        
-        ListModel lModel= jList1.getModel();
-        Favorite item = (Favorite)lModel.getElementAt(selectedIndex);
-        System.out.println("name= "+ item.getName());
-    }
-    public void showAddTagDialogBox(){
-        jDialog3.setVisible(true);
-    }
-    public void hideAddTagDialogBox(){
-        jDialog3.setVisible(false);
+        String data = (String) jTable1.getValueAt(selectedRowIndex, 1);
+        removeData(data);
+        return data;
     }
 //END REMOVE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-*/
+
     
     
     /**

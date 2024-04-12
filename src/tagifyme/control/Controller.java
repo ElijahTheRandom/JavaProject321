@@ -69,7 +69,9 @@ public class Controller {
                 }
                 
                 if(command == "Delete Data"){
-                    theView.removeData("Test2");
+                    String toDelete = theView.deleteSelectedData();
+                    Data dataToDelete = theModel.getData(toDelete);
+                    theModel.deleteData(dataToDelete);
                 }
                 
                 if(command == "Complete"){
