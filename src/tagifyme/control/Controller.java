@@ -5,6 +5,7 @@
 package tagifyme.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import tagifyme.model.Data;
 import tagifyme.view.TagifyMeGUI;
 import tagifyme.model.Database;
 /**
@@ -31,6 +32,9 @@ public class Controller {
         this.theView.deleteTagButton(new CalculateListener());
         this.theView.deleteDataButton(new CalculateListener());
         this.theView.sortButton(new CalculateListener());
+        this.theView.fileDialogButton(new CalculateListener());
+        this.theView.confirmTagButton(new CalculateListener());
+
 
     }
 
@@ -45,6 +49,32 @@ public class Controller {
             try {
                 // Get the JButton command
                 command = e.getActionCommand();
+                
+                if(command == "Add Data"){
+                    theView.showAddDataDialogBox();
+                    String[] myStrings = {"tag1", "tag2"};
+                    theView.populateTagList(myStrings);
+                    theView.addData("Test", "Test2", "Test3");
+                    theView.addData("Test4", "Test5", "Test6");
+                    theView.addData("Test7", "Test8", "Test9");
+
+                }
+                
+                if(command == "Delete Data"){
+                    theView.removeData("Test2");
+                }
+                
+                if(command == "Complete"){
+                    String Name = theView.getDataName();
+                    String PATH = theView.getDataPATH();
+                    theModel.addData(new Data(Name, PATH));
+                    theView.addData(Name, PATH, "test");
+                    theView.hideAddDataDialogBox();
+                }
+                
+                if (command == "Add Tag"){
+                    
+                }
 
             } catch (Exception exm) {
                 System.out.println(exm.getMessage());
