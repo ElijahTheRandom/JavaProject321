@@ -5,9 +5,11 @@
 package tagifyme.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import tagifyme.model.Data;
 import tagifyme.view.TagifyMeGUI;
 import tagifyme.model.Database;
+import tagifyme.model.Tag;
 /**
  *
  * @author pople
@@ -53,8 +55,15 @@ public class Controller {
                 if(command == "Add Data"){
 
                     theView.showAddDataDialogBox();
-                    String[] myStrings = {"tag1", "tag2"};
-                    theView.populateTagList(myStrings);
+                    ArrayList myStrings = new ArrayList<String>();
+                    int i = 0;
+                    for (Tag tags : theModel.tags() ){
+                        i++;
+                        myStrings.add(tags.getName());
+                    }
+                    String[] strings = new String[myStrings.size()];
+                    myStrings.toArray(strings);
+                    theView.populateTagList(strings);
                     theView.addData("Test", "Test2", "Test3");
                     theView.addData("Test4", "Test5", "Test6");
                     theView.addData("Test7", "Test8", "Test9");
@@ -74,7 +83,13 @@ public class Controller {
                 }
                 
                 if (command == "Add Tag"){
-                    
+                    theView.showAddTagDialogBox();
+                }
+                
+                if (command == "ADD TAG"){
+                    String Name = theView.getNewTagName();
+                    theModel.addTag(new Tag(Name));
+                    theView.hideAddTagDialogBox();
                 }
 
             } catch (Exception exm) {
