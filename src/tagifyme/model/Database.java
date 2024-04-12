@@ -24,15 +24,17 @@ public class Database implements Subject, Serializable {
   private Set<Data> data_set;
   private Set<Tag> tag_set;
   private Set<Relationship> relationship_set;
-
+  private Tag noTag;
   private List<Observer> obs_list;
 
     /**
      *
      */
   public Database() {
+    noTag = new Tag("Undefined");
     this.data_set = new HashSet<Data>();
     this.tag_set  = new HashSet<Tag>();
+    tag_set.add(noTag);
     this.relationship_set = new HashSet<Relationship>();
     this.obs_list = new ArrayList<Observer>();
   }
@@ -77,7 +79,6 @@ public class Database implements Subject, Serializable {
    * @param t Tag
    */
   public void addTag(Tag t) {
-    //TODO? Add a handler for subtags?
     this.tag_set.add(t);
   }
   /**
@@ -195,7 +196,22 @@ public class Database implements Subject, Serializable {
 
     return r;
   }
+  
+  public Iterable<Tag> tags(){
+      return tag_set;
+  }
 
+  
+  public Tag getTag(String name){
+    int i = 0;
+    for (Tag tag : tag_set ){
+        if(tag.getName().equals(name)){
+            return tag;
+        };
+    }
+    return noTag;
+  }
+  
   public void notifyObservers() {
     for (Observer obs: this.obs_list) {
       obs.update(this.data_and_tags());
