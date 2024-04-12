@@ -159,7 +159,14 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
                 .addContainerGap())
         );
 
-        jButton8.setText("ADD DATA");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("Add Tag");
+        jButton8.setActionCommand("ADD TAG");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -167,34 +174,31 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setText("Add Data");
+        jLabel3.setText("Add Tag");
 
         javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
         jDialog3.getContentPane().setLayout(jDialog3Layout);
         jDialog3Layout.setHorizontalGroup(
             jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog3Layout.createSequentialGroup()
+                .addGap(159, 159, 159)
                 .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog3Layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addGroup(jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jDialog3Layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jButton8)))
-                .addContainerGap(158, Short.MAX_VALUE))
+                    .addComponent(jButton8)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         jDialog3Layout.setVerticalGroup(
             jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(28, 28, 28)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(jButton8)
-                .addGap(53, 53, 53))
+                .addGap(44, 44, 44))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -362,6 +366,10 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
     
     
     //ADDING ACTION LISTENERS! These will be used by the controller
@@ -374,6 +382,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     
     public void addTagButton(ActionListener addTag) {
             jButton2.addActionListener(addTag);
+            jDialog3.setSize(jDialog3.getPreferredSize());
     }
     public void deleteDataButton(ActionListener deleteDataButton) {
             jButton3.addActionListener(deleteDataButton);
@@ -450,6 +459,44 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         jDialog2.setVisible(false);
     }
 //END ADD DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+    
+    
+    
+//ADD TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public String getNewTagName(){
+        String Name = jTextField3.getText();
+        return Name;
+    }
+    public void showAddTagDialogBox(){
+        jDialog3.setVisible(true);
+    }
+    public void hideAddTagDialogBox(){
+        jDialog3.setVisible(false);
+    }
+//END ADD TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+
+    
+    
+    
+/*REMOVE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public String deleteSelectedData(){
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+        ListModel lModel= jList1.getModel();
+        Favorite item = (Favorite)lModel.getElementAt(selectedIndex);
+        System.out.println("name= "+ item.getName());
+    }
+    public void showAddTagDialogBox(){
+        jDialog3.setVisible(true);
+    }
+    public void hideAddTagDialogBox(){
+        jDialog3.setVisible(false);
+    }
+//END REMOVE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+*/
+    
     
     /**
      * @param args the command line arguments

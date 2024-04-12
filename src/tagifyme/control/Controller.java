@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import tagifyme.model.Data;
 import tagifyme.view.TagifyMeGUI;
 import tagifyme.model.Database;
+import tagifyme.model.Relationship;
 import tagifyme.model.Tag;
 /**
  *
@@ -64,9 +65,6 @@ public class Controller {
                     String[] strings = new String[myStrings.size()];
                     myStrings.toArray(strings);
                     theView.populateTagList(strings);
-                    theView.addData("Test", "Test2", "Test3");
-                    theView.addData("Test4", "Test5", "Test6");
-                    theView.addData("Test7", "Test8", "Test9");
                     theModel.notifyObservers();
                 }
                 
@@ -77,8 +75,12 @@ public class Controller {
                 if(command == "Complete"){
                     String Name = theView.getDataName();
                     String PATH = theView.getDataPATH();
-                    theModel.addData(new Data(Name, PATH));
-                    theView.addData(Name, PATH, "test");
+                    String tagName = theView.getTagName();
+                    Data newData = new Data(Name, PATH);
+                    theModel.addData(newData);
+                    Tag correspondingTag = theModel.getTag(tagName);
+                    theModel.addRelationship(new Relationship(newData, correspondingTag));
+                    theView.addData(Name, PATH, tagName);
                     theView.hideAddDataDialogBox();
                 }
                 
