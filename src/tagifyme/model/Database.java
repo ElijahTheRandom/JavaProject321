@@ -212,6 +212,17 @@ public class Database implements Subject, Serializable {
     return noTag;
   }
   
+  
+    public Data getData(String PATH){
+    int i = 0;
+    for (Data data : data_set ){
+        if(data.getPATH().equals(PATH)){
+            return data;
+        };
+    }
+    return null;
+  }
+  
   public void notifyObservers() {
     for (Observer obs: this.obs_list) {
       obs.update(this.data_and_tags());
