@@ -115,7 +115,7 @@ public class Controller {
                 if (command == "DELETE TAG"){
                     String Name = theView.getDeletedTagName();
                     Tag toDelete = theModel.getTag(Name);
-                    //theModel.deleteTag(toDelete); broken?
+                    theModel.deleteTag(toDelete);
                     theView.deleteSelectedTag(Name);
                     theView.hideDeleteTagDialogBox();
                 }

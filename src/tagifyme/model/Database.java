@@ -96,7 +96,9 @@ public class Database implements Subject, Serializable {
    * @param t Tag to delete
    */
   public void deleteTag(Tag t) {
+    System.out.println(this.tag_set.contains(t));
     this.tag_set.remove(t); // Remove the tag from the set.
+    System.out.println(this.tag_set.contains(t));
 
     // If we're deleting a Tag, we need to delete the accompanying
     // relationships.
