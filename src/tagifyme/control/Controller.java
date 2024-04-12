@@ -37,6 +37,8 @@ public class Controller {
         this.theView.sortButton(new CalculateListener());
         this.theView.fileDialogButton(new CalculateListener());
         this.theView.confirmTagButton(new CalculateListener());
+        this.theView.confirmDeleteTagButton(new CalculateListener());
+
 
 
     }
@@ -94,6 +96,28 @@ public class Controller {
                     String Name = theView.getNewTagName();
                     theModel.addTag(new Tag(Name));
                     theView.hideAddTagDialogBox();
+                }
+                if (command == "Delete Tag"){
+                    theView.showDeleteTagDialogBox();
+                    ArrayList myStrings = new ArrayList<String>();
+                    int i = 0;
+                    for (Tag tags : theModel.tags() ){
+                        i++;
+                        if(tags.getName().equals("Undefined")){
+                            continue;
+                        }
+                        myStrings.add(tags.getName());
+                    }
+                    String[] strings = new String[myStrings.size()];
+                    myStrings.toArray(strings);
+                    theView.populateTagDeleteList(strings);
+                }
+                if (command == "DELETE TAG"){
+                    String Name = theView.getDeletedTagName();
+                    Tag toDelete = theModel.getTag(Name);
+                    //theModel.deleteTag(toDelete); broken?
+                    theView.deleteSelectedTag(Name);
+                    theView.hideDeleteTagDialogBox();
                 }
 
             } catch (Exception exm) {

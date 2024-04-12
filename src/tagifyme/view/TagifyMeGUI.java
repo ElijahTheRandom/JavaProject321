@@ -55,6 +55,11 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         jTextField3 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jDialog5 = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jButton9 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -199,6 +204,46 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
                 .addGap(26, 26, 26)
                 .addComponent(jButton8)
                 .addGap(44, 44, 44))
+        );
+
+        jList2.setModel(new DefaultListModel<>());
+        jScrollPane3.setViewportView(jList2);
+
+        jButton9.setText("DELETE TAG");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setText("DELETE TAG");
+
+        javax.swing.GroupLayout jDialog5Layout = new javax.swing.GroupLayout(jDialog5.getContentPane());
+        jDialog5.getContentPane().setLayout(jDialog5Layout);
+        jDialog5Layout.setHorizontalGroup(
+            jDialog5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addGroup(jDialog5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog5Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel4))
+                    .addGroup(jDialog5Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jButton9)))
+                .addGap(36, 36, 36))
+        );
+        jDialog5Layout.setVerticalGroup(
+            jDialog5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog5Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addComponent(jButton9)
+                .addGap(89, 89, 89))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -370,6 +415,10 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
     
     
     //ADDING ACTION LISTENERS! These will be used by the controller
@@ -389,6 +438,8 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     }
     public void deleteTagButton(ActionListener deleteTagButton) {
             jButton4.addActionListener(deleteTagButton);
+            jDialog5.setSize(jDialog2.getPreferredSize());
+
     }
     public void sortButton(ActionListener sortButton) {
             jButton4.addActionListener(sortButton);
@@ -398,6 +449,9 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     }
     public void confirmTagButton(ActionListener confirmTagButton){
             jButton8.addActionListener(confirmTagButton);
+    }
+    public void confirmDeleteTagButton(ActionListener confirmDeleteTagButton){
+            jButton9.addActionListener(confirmDeleteTagButton);
     }
 
     @Override
@@ -423,6 +477,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         for (int i=0; i < model.getRowCount(); i++){
             if (((String)model.getValueAt(i, 1)).equals(PATH)) {
                 model.removeRow(i);
+                break;
             }
         }
     }
@@ -480,14 +535,43 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     
     
     
-//REMOVE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//DELETE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public String deleteSelectedData(){
         int selectedRowIndex = jTable1.getSelectedRow();
         String data = (String) jTable1.getValueAt(selectedRowIndex, 1);
         removeData(data);
         return data;
     }
-//END REMOVE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//END DELETE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    
+//DELETE TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void deleteSelectedTag(String Name){
+        for (int i = 0; i < jTable1.getRowCount(); i++){
+            if((jTable1.getValueAt(i, 2)).toString().contains(Name)){
+                jTable1.setValueAt((jTable1.getValueAt(i, 2)).toString().replace(Name, ""), i, 2);
+            }
+        }
+    }
+    public String getDeletedTagName(){
+        String Tag = jList2.getSelectedValue();
+        return Tag;
+    }
+    
+    public void populateTagDeleteList(String[] items){
+        DefaultListModel tagList = (DefaultListModel) jList2.getModel();
+        for(String i: items){
+            tagList.addElement(i);
+        }
+    }
+    
+    public void showDeleteTagDialogBox(){
+        jDialog5.setVisible(true);
+    }
+    public void hideDeleteTagDialogBox(){
+        jDialog5.setVisible(false);
+    }
+//END DELETE TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     
     
@@ -536,16 +620,21 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JDialog jDialog3;
+    private javax.swing.JDialog jDialog5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
