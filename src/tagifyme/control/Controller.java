@@ -46,23 +46,6 @@ public class Controller {
     public class CalculateListener implements ActionListener {
 
         /**
-         * Mapping between variable names to strings that are useful
-         * when button mashing.
-         */
-        public static class Command {
-            // TODO: I'd prefer to use an Enum, but see
-            // https://docs.oracle.com/javase/8/docs/api/java/awt/event/ActionEvent.html
-            // It's passing a `String`!
-            
-            public static String VIEW_ADD_DATA_DIALOG = "VIEW_ADD_DATA_DIALOG";
-            public static String ADD_DATA = "ADD_DATA";
-            public static String DELETE_DATA = "DELETE_DATA";
-            public static String VIEW_ADD_TAG_DIALOG = "VIEW_ADD_TAG_DIALOG";
-            public static String ADD_TAG = "ADD_TAG";
-            public static String DELETE_TAG = "DELETE_TAG";
-        };
-
-        /**
          * Populate the UI with dialogs that allow for the
          * addition of data.
          */
@@ -101,8 +84,8 @@ public class Controller {
             try {
                 // Get the JButton command
                 command = e.getActionCommand();
-                
-                if(command == Command.VIEW_ADD_DATA_DIALOG){
+
+                if (command.equals(Command.VIEW_ADD_DATA_DIALOG)) {
                     handleVIEW_ADD_DATA_DIALOG();
                 }
                 
