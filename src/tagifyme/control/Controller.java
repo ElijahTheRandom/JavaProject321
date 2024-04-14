@@ -66,14 +66,14 @@ public class Controller {
             theModel.addData(d);
             // If we've selected a tag, add the appropriate relationship.
             Tag pT = theModel.getTag(theView.getTagName());
-            String pTname = "";
+            String pTName = "";
             if (pT != null) {
                 theModel.addRelationship(new Relationship(d, pT));
-                ptName = pT.getName();
+                pTName = pT.getName();
             }
 
             // Propagate the changes to the model.
-            theView.addData(d.getName(), d.getPATH(), pTname);
+            theView.addData(d.getName(), d.getPATH(), pTName);
         }
 
         private void handleDELETE_DATA() {
