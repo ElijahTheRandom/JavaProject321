@@ -1,12 +1,14 @@
+/* Within the database the 'Relationship' is the mapping
+ * between the 'Data' and the 'Tag'.
+ */
 package tagifyme.model;
-
 import java.io.Serializable;
 
 /**
- * Base class for relationships within the database
- * @author elijah
+ * A `Relationship` associates some `Data` with a `Tag`.
  */
 public class Relationship implements Serializable {
+  // data_ref <-> tag_ref;
   private Data data_ref;
   private Tag tag_ref;
 
@@ -21,20 +23,18 @@ public class Relationship implements Serializable {
   }
 
 /**
- * 
- * @return Returns Data
+ * Return the `Data` portion of the `Relationship`.
+ * @return return the `Data`.
  */
   public Data getData() {
     return this.data_ref;
   }
 
   /**
-   * 
-   * @return Returns Tag
+   * Return the `Tag` portion of the `Relationship`.
+   * @return return the `Tag`.
    */
   public Tag getTag() {
     return this.tag_ref;
   }
-  
 }
-
