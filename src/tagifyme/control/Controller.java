@@ -55,7 +55,8 @@ public class Controller {
 
         /**
          * Process the data from the Add Data Dialog
-         * and place it within the model. */
+         * and place it within the model.
+         */
         private void handleADD_DATA() {
             theView.hideAddDataDialogBox(); // Hide the UI from the User.
 
@@ -65,13 +66,14 @@ public class Controller {
             theModel.addData(d);
             // If we've selected a tag, add the appropriate relationship.
             Tag pT = theModel.getTag(theView.getTagName());
+            String pTname = "";
             if (pT != null) {
                 theModel.addRelationship(new Relationship(d, pT));
-                theView.addData(d.getName(), d.getPATH(), pT.getName());
-            } else {
-                // If there's no Tag, stick \"\" in there.
-                theView.addData(d.getName(), d.getPATH(), "");
+                ptName = pT.getName();
             }
+
+            // Propagate the changes to the model.
+            theView.addData(d.getName(), d.getPATH(), pTname);
         }
 
         private void handleDELETE_DATA() {
