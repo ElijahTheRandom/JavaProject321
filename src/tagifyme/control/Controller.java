@@ -54,16 +54,23 @@ public class Controller {
             // https://docs.oracle.com/javase/8/docs/api/java/awt/event/ActionEvent.html
             // It's passing a `String`!
             
-            public String VIEW_ADD_DATA_DIALOG = "VIEW_ADD_DATA_DIALOG";
-            public String ADD_DATA = "ADD_DATA";
-            public String DELETE_DATA = "DELETE_DATA";
-            public String VIEW_ADD_TAG_DIALOG = "VIEW_ADD_TAG_DIALOG";
-            public String ADD_TAG = "ADD_TAG";
-            public String DELETE_TAG = "DELETE_TAG";
+            public static String VIEW_ADD_DATA_DIALOG = "VIEW_ADD_DATA_DIALOG";
+            public static String ADD_DATA = "ADD_DATA";
+            public static String DELETE_DATA = "DELETE_DATA";
+            public static String VIEW_ADD_TAG_DIALOG = "VIEW_ADD_TAG_DIALOG";
+            public static String ADD_TAG = "ADD_TAG";
+            public static String DELETE_TAG = "DELETE_TAG";
         };
 
+        /**
+         * Populate the UI with dialogs that allow for the
+         * addition of data.
+         */
         private void handleVIEW_ADD_DATA_DIALOG() {
-            // TODO
+            // Populate the dialog with the current list of tags.
+            theView.populateTagList(theModel.tags());
+            // Show the dialog to the user.
+            theView.showAddDataDialogBox();
         } 
 
         private void handleADD_DATA() {
@@ -95,19 +102,8 @@ public class Controller {
                 // Get the JButton command
                 command = e.getActionCommand();
                 
-                if(command == "Add Data"){
-
-                    theView.showAddDataDialogBox();
-                    ArrayList myStrings = new ArrayList<String>();
-                    int i = 0;
-                    for (Tag tags : theModel.tags() ){
-                        i++;
-                        myStrings.add(tags.getName());
-                    }
-                    String[] strings = new String[myStrings.size()];
-                    myStrings.toArray(strings);
-                    theView.populateTagList(strings);
-                    theModel.notifyObservers();
+                if(command == Command.VIEW_ADD_DATA_DIALOG){
+                    handleVIEW_ADD_DATA_DIALOG();
                 }
                 
                 if(command == "Delete Data"){

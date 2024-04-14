@@ -504,12 +504,15 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     public void showAddDataDialogBox(){
         jDialog2.setVisible(true);
     }
-    public void populateTagList(String[] items){
+
+    public void populateTagList(Iterable<Tag> items){
+        // TODO: This is where I likely need to stick the GFX portions.
         DefaultListModel tagList = (DefaultListModel) jList1.getModel();
-        for(String i: items){
-            tagList.addElement(i);
+        for(Tag t: items){
+            tagList.addElement(t.getName());
         }
     }
+
     public void hideAddDataDialogBox(){
         jDialog2.setVisible(false);
     }
