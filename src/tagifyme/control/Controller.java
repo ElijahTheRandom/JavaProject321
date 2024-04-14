@@ -38,9 +38,6 @@ public class Controller {
         this.theView.fileDialogButton(new CalculateListener());
         this.theView.confirmTagButton(new CalculateListener());
         this.theView.confirmDeleteTagButton(new CalculateListener());
-
-
-
     }
     
     public class CalculateListener implements ActionListener {
