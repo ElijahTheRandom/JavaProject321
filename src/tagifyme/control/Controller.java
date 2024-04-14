@@ -46,6 +46,21 @@ public class Controller {
     
     public class CalculateListener implements ActionListener {
 
+        /**
+         * Mapping between variable names to strings that are useful
+         * when button mashing.
+         */
+        public static class Command {
+            // TODO: I'd prefer to use an Enum, but see
+            // https://docs.oracle.com/javase/8/docs/api/java/awt/event/ActionEvent.html
+            // It's passing a `String`!
+            
+            public String ADD_DATA = "ADD_DATA";
+            public String DELETE_DATA = "DELETE_DATA";
+            public String ADD_TAG = "ADD_TAG";
+            public String DELETE_TAG = "DELETE_TAG";
+        };
+
         @Override
         public void actionPerformed(ActionEvent e) {
 
