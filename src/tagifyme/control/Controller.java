@@ -64,8 +64,12 @@ public class Controller {
             // TODO
         }
 
+        /**
+         * Populate the UI with dialogs that allow for the
+         * addition of tags.
+         */
         private void handleVIEW_ADD_TAG_DIALOG() {
-            // TODO
+            theView.showAddTagDialogBox();
         }
 
         private void handleADD_TAG() {
@@ -107,8 +111,8 @@ public class Controller {
                     theView.hideAddDataDialogBox();
                 }
                 
-                if (command == "Add Tag"){
-                    theView.showAddTagDialogBox();
+                if (command.equals(Command.VIEW_ADD_TAG_DIALOG)){
+                    handleVIEW_ADD_TAG_DIALOG();
                 }
                 
                 if (command == "ADD TAG"){
