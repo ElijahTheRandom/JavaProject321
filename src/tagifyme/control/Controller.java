@@ -42,7 +42,6 @@ public class Controller {
 
 
     }
-
     
     public class CalculateListener implements ActionListener {
 
@@ -55,11 +54,37 @@ public class Controller {
             // https://docs.oracle.com/javase/8/docs/api/java/awt/event/ActionEvent.html
             // It's passing a `String`!
             
+            public String VIEW_ADD_DATA_DIALOG = "VIEW_ADD_DATA_DIALOG";
             public String ADD_DATA = "ADD_DATA";
             public String DELETE_DATA = "DELETE_DATA";
+            public String VIEW_ADD_TAG_DIALOG = "VIEW_ADD_TAG_DIALOG";
             public String ADD_TAG = "ADD_TAG";
             public String DELETE_TAG = "DELETE_TAG";
         };
+
+        private void handleVIEW_ADD_DATA_DIALOG() {
+            // TODO
+        } 
+
+        private void handleADD_DATA() {
+            // TODO
+        }
+
+        private void handleDELETE_DATA() {
+            // TODO
+        }
+
+        private void handleVIEW_ADD_TAG_DIALOG() {
+            // TODO
+        }
+
+        private void handleADD_TAG() {
+            // TODO
+        }
+
+        private void handleDELETE_TAG() {
+            // TODO
+        }
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -138,11 +163,7 @@ public class Controller {
             } catch (Exception exm) {
                 System.out.println(exm.getMessage());
             }
-
         }
-
     }
-
-    
 }
 
