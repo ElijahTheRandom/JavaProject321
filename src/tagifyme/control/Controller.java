@@ -56,12 +56,28 @@ public class Controller {
             theView.showAddDataDialogBox();
         } 
 
+        /**
+         * Process the data from the Add Data Dialog
+         * and place it within the model. */
         private void handleADD_DATA() {
-            // TODO
+            theView.hideAddDataDialogBox(); // Hide the UI from the User.
+
+            // TODO: This `PATH` thing annoys me: it shouldn't be all
+            // capitalized -- that's a const!
+            Data d = new Data(theView.getDataName(), theView.getDataPATH());
+            theModel.addData(d);
+            // If we've selected a tag, add the appropriate relationship.
+            Tag pT = theModel.getTag(theView.getTagName());
+            if (pT != null) {
+                theModel.addRelationship(new Relationship(d, pT));
+                theView.addData(d.getName(), d.getPATH(), pT.getName());
+            } else {
+                // If there's no Tag, stick \"\" in there.
+                theView.addData(d.getName(), d.getPATH(), "");
+            }
         }
 
         private void handleDELETE_DATA() {
-            // TODO
         }
 
         /**
@@ -99,16 +115,8 @@ public class Controller {
                     theModel.deleteData(dataToDelete);
                 }
                 
-                if(command == "Complete"){
-                    String Name = theView.getDataName();
-                    String PATH = theView.getDataPATH();
-                    String tagName = theView.getTagName();
-                    Data newData = new Data(Name, PATH);
-                    theModel.addData(newData);
-                    Tag correspondingTag = theModel.getTag(tagName);
-                    theModel.addRelationship(new Relationship(newData, correspondingTag));
-                    theView.addData(Name, PATH, tagName);
-                    theView.hideAddDataDialogBox();
+                if (command.equals(Command.ADD_DATA)) {
+                    handleADD_DATA();
                 }
                 
                 if (command.equals(Command.VIEW_ADD_TAG_DIALOG)){
