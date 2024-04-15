@@ -214,7 +214,7 @@ public class Database implements Subject, Serializable {
             return tag;
         };
     }
-    return noTag;
+    return new Tag("Undefined");
   }
   
   // TODO: I don't know why this is needed either.

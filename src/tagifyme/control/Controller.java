@@ -48,7 +48,7 @@ public class Controller {
          */
         private void handleVIEW_ADD_DATA_DIALOG() {
             // Populate the dialog with the current list of tags.
-            theView.populateTagList(theModel.tags());
+            theView.populateTagList(theModel.allTags());
             // Show the dialog to the user.
             theView.showAddDataDialogBox();
         } 
@@ -131,7 +131,7 @@ public class Controller {
                     theView.showDeleteTagDialogBox();
                     ArrayList myStrings = new ArrayList<String>();
                     int i = 0;
-                    for (Tag tags : theModel.tags() ){
+                    for (Tag tags : theModel.allTags() ){
                         i++;
                         if(tags.getName().equals("Undefined")){
                             continue;
