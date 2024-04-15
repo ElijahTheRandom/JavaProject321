@@ -102,6 +102,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         jLabel2.setText("Add Data");
 
         jButton7.setText("Complete");
+        jButton7.setActionCommand("ADD_DATA");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -171,7 +172,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         });
 
         jButton8.setText("Add Tag");
-        jButton8.setActionCommand("ADD TAG");
+        jButton8.setActionCommand("ADD_TAG");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -210,6 +211,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         jScrollPane3.setViewportView(jList2);
 
         jButton9.setText("DELETE TAG");
+        jButton9.setActionCommand("DELETE_TAG");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -276,6 +278,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Add Data");
+        jButton1.setActionCommand("VIEW_ADD_DATA_DIALOG");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -283,6 +286,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         });
 
         jButton2.setText("Add Tag");
+        jButton2.setActionCommand("VIEW_ADD_TAG_DIALOG");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -290,6 +294,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         });
 
         jButton3.setText("Delete Data");
+        jButton3.setActionCommand("DELETE_DATA");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -297,6 +302,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         });
 
         jButton4.setText("Delete Tag");
+        jButton4.setActionCommand("VIEW_DELETE_TAG_DIALOG");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
