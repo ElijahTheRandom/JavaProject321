@@ -13,7 +13,7 @@ public class Relationship implements Serializable {
   private Tag tag_ref;
 
   /**
-   * Constructor to make a relationship between tag and data.
+   * Constructor to make a `Relationship` between `Tag` and `Data`.
    * @param d Data
    * @param t Tag
    */
