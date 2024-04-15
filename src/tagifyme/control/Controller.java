@@ -1,35 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tagifyme.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import tagifyme.model.Data;
 import tagifyme.view.TagifyMeGUI;
 import tagifyme.model.Database;
 import tagifyme.model.Relationship;
 import tagifyme.model.Tag;
-/**
- *
- * @author pople
- */
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
+/**
+ * Top-level Controller for MVC.
+ */
 public class Controller {
 
+    // Point to the other two objects within the MVC.
     private final TagifyMeGUI theView;
     private final Database theModel;
-
     
     public Controller(TagifyMeGUI theView, Database theModel) {
         this.theView = theView;
         this.theModel = theModel;
         
+        // TODO: Perhaps this isn't all pointing toward a single listener,
+        // but is refactored into multiple listeners/classes?
         this.theView.addDataButton(new CalculateListener());
         this.theView.addTagButton(new CalculateListener());
         this.theView.deleteTagButton(new CalculateListener());
@@ -130,47 +122,25 @@ public class Controller {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
-            String command;
-
             try {
-                // Get the JButton command
-                command = e.getActionCommand();
-
+                String command = e.getActionCommand();
                 if (command.equals(Command.VIEW_ADD_DATA_DIALOG)) {
                     handleVIEW_ADD_DATA_DIALOG();
-                }
-                
-                if (command.equals(Command.DELETE_DATA)) {
+                } else if (command.equals(Command.DELETE_DATA)) {
                     handleDELETE_DATA();
-                }
-                
-                if (command.equals(Command.ADD_DATA)) {
+                } else if (command.equals(Command.ADD_DATA)) {
                     handleADD_DATA();
-                }
-                
-                if (command.equals(Command.VIEW_ADD_TAG_DIALOG)){
+                } else if (command.equals(Command.VIEW_ADD_TAG_DIALOG)) {
                     handleVIEW_ADD_TAG_DIALOG();
-                }
-                
-                if (command.equals(Command.ADD_TAG)){
+                } else if (command.equals(Command.ADD_TAG)) {
                     handleADD_TAG();
-                }
-
-                if (command.equals(Command.VIEW_ADD_TAG_DIALOG)){
+                } else if (command.equals(Command.VIEW_ADD_TAG_DIALOG)) {
                     handleVIEW_DELETE_TAG_DIALOG();
+                } else if (command.equals(Command.DELETE_TAG)) {
+                    handleDELETE_TAG();
                 }
-
-                if (command == "DELETE TAG"){
-                    String Name = theView.getDeletedTagName();
-                    Tag toDelete = theModel.getTag(Name);
-                    //theModel.deleteTag(toDelete); broken?
-                    theView.deleteSelectedTag(Name);
-                    theView.hideDeleteTagDialogBox();
-                }
-
             } catch (Exception exm) {
-                System.out.println(exm.getMessage());
+                System.out.println(String.format("Controller error %S", exm.getMessage()));
             }
         }
     }
