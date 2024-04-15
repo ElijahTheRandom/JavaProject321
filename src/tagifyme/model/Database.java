@@ -217,16 +217,21 @@ public class Database implements Subject, Serializable {
     return new Tag("Undefined");
   }
   
-  // TODO: I don't know why this is needed either.
-  // This might just be a `contains`?
-  public Data getData(String PATH) {
-    int i = 0;
-    for (Data data : data_set ){
-      if(data.getPATH().equals(PATH)){
-          return data;
-      };
+  /**
+   * Delete some Data from the Database by PATH.
+   */
+  public void deleteDataByPATH(String PATH) {
+    // TODO: I have no idea why you've chosen to delete
+    // via PATH; it's likely easier to do it with `name`
+    // only because there will be 'Set' contains type
+    // methods; but whatever.
+    for (Data d : data_set) {
+      if (d.getPATH().equals(PATH)) {
+        // TODO: Again, is there any risk to modifying the
+        // underlying structure while iterating over it?
+        this.deleteData(d);
+      }
     }
-    return null;
   }
 
   /**

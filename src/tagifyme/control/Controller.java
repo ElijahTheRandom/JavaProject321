@@ -76,7 +76,15 @@ public class Controller {
             theView.addData(d.getName(), d.getPATH(), pTName);
         }
 
+        /**
+         * The User has selected some Data to delete, propagate
+         * that downward to the model.
+         */
         private void handleDELETE_DATA() {
+            // TODO: It's likely that this should be renamed
+            // as a getter.
+            String nameToDelete = theView.deleteSelectedData();
+            theModel.deleteDataByPATH(nameToDelete);
         }
 
         /**
@@ -87,8 +95,15 @@ public class Controller {
             theView.showAddTagDialogBox();
         }
 
+        /**
+         * The User has requested to add some Tag, propagate
+         * that down to the model.
+         */
         private void handleADD_TAG() {
-            // TODO
+            // Hide the dialog from the User, then fetch the new Tag name
+            // from the view, then push to the model.
+            theView.hideAddTagDialogBox();
+            theModel.addTag(new Tag(theView.getNewTagName()));
         }
 
         private void handleDELETE_TAG() {
@@ -108,10 +123,8 @@ public class Controller {
                     handleVIEW_ADD_DATA_DIALOG();
                 }
                 
-                if(command == "Delete Data"){
-                    String toDelete = theView.deleteSelectedData();
-                    Data dataToDelete = theModel.getData(toDelete);
-                    theModel.deleteData(dataToDelete);
+                if (command.equals(Command.DELETE_DATA)) {
+                    handleDELETE_DATA();
                 }
                 
                 if (command.equals(Command.ADD_DATA)) {
@@ -122,11 +135,10 @@ public class Controller {
                     handleVIEW_ADD_TAG_DIALOG();
                 }
                 
-                if (command == "ADD TAG"){
-                    String Name = theView.getNewTagName();
-                    theModel.addTag(new Tag(Name));
-                    theView.hideAddTagDialogBox();
+                if (command.equals(Command.ADD_TAG)){
+                    handleADD_TAG();
                 }
+
                 if (command == "Delete Tag"){
                     theView.showDeleteTagDialogBox();
                     ArrayList myStrings = new ArrayList<String>();
