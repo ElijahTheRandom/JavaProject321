@@ -96,6 +96,19 @@ public class Controller {
         }
 
         /**
+         * Populate the UI with dialogs that allow for the
+         * deletion of Tags.
+         */
+        private void handleVIEW_DELETE_TAG_DIALOG() {
+            // TODO: What to populate the list with? I don't
+            // think it should be `Strings`.
+            // theView.populateTagDeleteList(theModel.allTags());
+                        
+            // Show the UI to the user.
+            theView.showDeleteTagDialogBox();
+        }
+
+        /**
          * The User has requested to add some Tag, propagate
          * that down to the model.
          */
@@ -106,8 +119,13 @@ public class Controller {
             theModel.addTag(new Tag(theView.getNewTagName()));
         }
 
+        /**
+         * The user has requested to delete some Tag, propagate
+         * that down to the model.
+         */
         private void handleDELETE_TAG() {
-            // TODO
+            theView.hideDeleteTagDialogBox();
+            theModel.deleteTag(new Tag(theView.getDeletedTagName()));
         }
 
         @Override
@@ -139,21 +157,10 @@ public class Controller {
                     handleADD_TAG();
                 }
 
-                if (command == "Delete Tag"){
-                    theView.showDeleteTagDialogBox();
-                    ArrayList myStrings = new ArrayList<String>();
-                    int i = 0;
-                    for (Tag tags : theModel.allTags() ){
-                        i++;
-                        if(tags.getName().equals("Undefined")){
-                            continue;
-                        }
-                        myStrings.add(tags.getName());
-                    }
-                    String[] strings = new String[myStrings.size()];
-                    myStrings.toArray(strings);
-                    theView.populateTagDeleteList(strings);
+                if (command.equals(Command.VIEW_ADD_TAG_DIALOG)){
+                    handleVIEW_DELETE_TAG_DIALOG();
                 }
+
                 if (command == "DELETE TAG"){
                     String Name = theView.getDeletedTagName();
                     Tag toDelete = theModel.getTag(Name);

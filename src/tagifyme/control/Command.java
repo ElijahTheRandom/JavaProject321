@@ -13,6 +13,7 @@ public class Command {
     public static String ADD_DATA = "ADD_DATA";
     public static String DELETE_DATA = "DELETE_DATA";
     public static String VIEW_ADD_TAG_DIALOG = "VIEW_ADD_TAG_DIALOG";
+    public static String VIEW_DELETE_TAG_DIALOG = "VIEW_DELETE_TAG_DIALOG";
     public static String ADD_TAG = "ADD_TAG";
     public static String DELETE_TAG = "DELETE_TAG";
 };
