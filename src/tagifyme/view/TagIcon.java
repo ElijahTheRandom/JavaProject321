@@ -1,18 +1,24 @@
+/** A GFX object for a Tag.
+ */
 package tagifyme.view;
-
 import javax.swing.ImageIcon;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
-
 import tagifyme.model.Tag;
 
+/**
+ * The `TagIcon` is an extension of `ImageIcon`.
+ */
 public class TagIcon extends ImageIcon {
 
   private Tag t;
   private static final Color cList[] = {Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.ORANGE};
 
+  /**
+   * Create a `TagIcon` from the specified `Tag`.
+   */
   public TagIcon(Tag t) {
     super();
     this.t = t;
@@ -26,6 +32,9 @@ public class TagIcon extends ImageIcon {
   }
   
 
+  /**
+   * Compute an image from a passed `Tag` and the Graphics object.
+   */
   private void computeImage(Tag t, Graphics2D g2d) {
     int h = t.hashCode();
 
