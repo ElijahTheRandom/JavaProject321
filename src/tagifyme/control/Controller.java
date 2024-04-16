@@ -134,7 +134,7 @@ public class Controller {
                     handleVIEW_ADD_TAG_DIALOG();
                 } else if (command.equals(Command.ADD_TAG)) {
                     handleADD_TAG();
-                } else if (command.equals(Command.VIEW_ADD_TAG_DIALOG)) {
+                } else if (command.equals(Command.VIEW_DELETE_TAG_DIALOG)) {
                     handleVIEW_DELETE_TAG_DIALOG();
                 } else if (command.equals(Command.DELETE_TAG)) {
                     handleDELETE_TAG();
