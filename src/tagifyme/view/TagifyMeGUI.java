@@ -63,8 +63,8 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addDataButton = new javax.swing.JButton();
+        addTagButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -277,19 +277,19 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Add Data");
-        jButton1.setActionCommand("VIEW_ADD_DATA_DIALOG");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addDataButton.setText("Add Data");
+        addDataButton.setActionCommand("VIEW_ADD_DATA_DIALOG");
+        addDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addDataButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Add Tag");
-        jButton2.setActionCommand("VIEW_ADD_TAG_DIALOG");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        addTagButton.setText("Add Tag");
+        addTagButton.setActionCommand("VIEW_ADD_TAG_DIALOG");
+        addTagButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                addTagButtonActionPerformed(evt);
             }
         });
 
@@ -324,9 +324,9 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jButton1)
+                .addComponent(addDataButton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(addTagButton)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
@@ -342,8 +342,8 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(addDataButton)
+                    .addComponent(addTagButton)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5)
@@ -373,13 +373,13 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addDataButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void addTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTagButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_addTagButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -430,13 +430,13 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     //ADDING ACTION LISTENERS! These will be used by the controller
     //to catch events (when button will be pressed)
     public void addDataButton(ActionListener addData) {
-            jButton1.addActionListener(addData);
+            addDataButton.addActionListener(addData);
             jDialog2.setSize(jDialog2.getPreferredSize());
 
     }
     
     public void addTagButton(ActionListener addTag) {
-            jButton2.addActionListener(addTag);
+            addTagButton.addActionListener(addTag);
             jDialog3.setSize(jDialog3.getPreferredSize());
     }
     public void deleteDataButton(ActionListener deleteDataButton) {
@@ -621,8 +621,8 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     private File file;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton addDataButton;
+    private javax.swing.JButton addTagButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
