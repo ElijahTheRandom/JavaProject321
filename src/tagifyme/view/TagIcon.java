@@ -31,6 +31,15 @@ public class TagIcon extends ImageIcon {
     computeImage(t, g2d);
   }
   
+  @Override
+  public int getIconWidth() {
+    return 15;
+  }
+
+  @Override
+  public int getIconHeight() {
+    return 15;
+  }
 
   /**
    * Compute an image from a passed `Tag` and the Graphics object.
@@ -39,16 +48,17 @@ public class TagIcon extends ImageIcon {
     int h = t.hashCode();
 
     // Compute four colors.
-    Color c1 = cList[h >> 0 % cList.length];
-    Color c2 = cList[h >> 1 % cList.length];
-    Color c3 = cList[h >> 2 % cList.length];
-    Color c4 = cList[h >> 3 % cList.length];
+    Color c1 = cList[(h >> 0) % cList.length];
+    Color c2 = cList[(h >> 1) % cList.length];
+    Color c3 = cList[(h >> 2) % cList.length];
+    Color c4 = cList[(h >> 3) % cList.length];
 
     int width  = getIconWidth();
     int height = getIconHeight();
 
     // Split the square into four equal bits; write
     // a color to each of those four portions.
+
     g2d.setColor(c1);
     g2d.fillRect(0, 0, width/2, height/2);
     g2d.setColor(c2);

@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.border.EmptyBorder;
 
 import tagifyme.observer.Observer;
 import tagifyme.model.Data;
@@ -369,6 +370,8 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jList1.setCellRenderer(new TagCellRenderer());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
