@@ -1,6 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * The main UI element.
+ * When designing we had mainly focused on the Database model as it's
+ * less tightly coupled than the UI, which is tightly coupled to Swing
+ * (and none of us had used Swing before!).
  */
 package tagifyme.view;
 
@@ -22,8 +24,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- *
- * @author ethan
+ * The main UI element.
  */
 public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable<Pair<Data, Set<Tag>>>> {
 
@@ -311,6 +312,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         });
 
         jButton5.setText("Sort");
+        jButton5.setActionCommand("FILTER");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -406,7 +408,6 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
         JFileChooser fileChooser = new JFileChooser();
         int option = fileChooser.showOpenDialog(jDialog1);
         if(option == JFileChooser.APPROVE_OPTION){
@@ -430,46 +431,79 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     }//GEN-LAST:event_jButton9ActionPerformed
 
     
+    // TODO: Can this ActionListener code be private?
     
-    //ADDING ACTION LISTENERS! These will be used by the controller
-    //to catch events (when button will be pressed)
+    /**
+     * Action listener code associating addData with the AddData button.
+     */
     public void addDataButton(ActionListener addData) {
             addDataButton.addActionListener(addData);
             jDialog2.setSize(jDialog2.getPreferredSize());
-
     }
     
+    /**
+     * Action listener code associating addTag with the AddTag button.
+     */
     public void addTagButton(ActionListener addTag) {
             addTagButton.addActionListener(addTag);
             jDialog3.setSize(jDialog3.getPreferredSize());
     }
+
+    /**
+     * Action listener code associating deleteData with the DeleteData button.
+     */
     public void deleteDataButton(ActionListener deleteDataButton) {
             jButton3.addActionListener(deleteDataButton);
     }
+
+    /**
+     * Action listener code associating deleteTag with the DeleteTag button.
+     */
     public void deleteTagButton(ActionListener deleteTagButton) {
             jButton4.addActionListener(deleteTagButton);
             jDialog5.setSize(jDialog2.getPreferredSize());
 
     }
+
+    /**
+     * Action listener code associating sort with the SortButton.
+     */
     public void sortButton(ActionListener sortButton) {
             jButton4.addActionListener(sortButton);
     }
+
+    /**
+     * Action listener code the fileDialog with the fileDialogButton.
+     */
     public void fileDialogButton(ActionListener fileDialogButton) {
             jButton7.addActionListener(fileDialogButton);
     }
+
+    /**
+     * Action listener code associating confirmTag with the confirmTagButton.
+     */
     public void confirmTagButton(ActionListener confirmTagButton){
             jButton8.addActionListener(confirmTagButton);
     }
+
+    /**
+     * Action listener code associating confirmDelete with the confirmDeleteTagButton.
+     */
     public void confirmDeleteTagButton(ActionListener confirmDeleteTagButton){
             jButton9.addActionListener(confirmDeleteTagButton);
     }
-
+   
+    /**
+     * The observer method, where we've been passed an Update which contains
+     * all of the <Data, Set<Tag>> pairs of the model.
+     * Update the required elements on the UI screen.
+     */
     @Override
     public void update(Iterable<Pair<Data, Set<Tag>>> dI) {
         // Clear the table.
         // TODO: We're just dumping the entirety of the memory here; it'd
         // be way more efficient to prune the differences, etc.
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();;
         model.setRowCount(0);
 
         // Begin adding the data to the table.
@@ -499,95 +533,126 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         model.addRow(row);
     }
 
+    /**
+     * Return the filePath to be associated with the new Data.
+     */
     public String getDataPATH(){
         String PATH = file.getAbsolutePath();
         return PATH;
     }
+
+    /**
+     * Return the name for the Data to be added.
+     */
     public String getDataName(){
-        String Name = jTextField2.getText();
-        return Name;
+        return jTextField2.getText();
     }
+
+    /**
+     * Return the Tag name selected for adding data.
+     */
     public String getTagName(){
-        String Tag = jList1.getSelectedValue();
-        return Tag;
+        // TODO: Again, this could have been Tag. Not a big
+        // deal, but it's better from a design perspective.
+        return jList1.getSelectedValue();
     }
+
+    /**
+     * Offer up the DialogBox that presents the UI for adding data.
+     */
     public void showAddDataDialogBox(){
         jDialog2.setVisible(true);
     }
 
+    /**
+     * Hide the Dialog box that presents the UI for adding data.
+     */
+    public void hideAddDataDialogBox(){
+        jDialog2.setVisible(false);
+    }
+    
+    /**
+     * Return the selected Data that is currently selected on the Table.
+     */
+    public Data selectedData(){
+        int selectedRowIndex = jTable1.getSelectedRow();
+        // We should be able to reconstruct the Data object from the table.
+        // TODO: At some level, this should just be the straight Data object
+        // with a CustomCellRenderer.
+        String name = (String) jTable1.getValueAt(selectedRowIndex, 0);
+        String PATH = (String) jTable1.getValueAt(selectedRowIndex, 1);
+        return new Data(name, PATH);
+    }
+
+    /**
+     * Return the name of the Tag that is to be added.
+     */
+    public String getNewTagName(){
+        return jTextField3.getText();
+    }
+
+    /**
+     * Return the name of the Tag that is selected.
+     */
+    public String getDeletedTagName(){
+        // TODO: The jList2 is populated with Strings compared to Tags.
+        // It's likely better to have it populated with Tags, but that's a
+        // decently large refactor that doesn't add any features...
+        return jList2.getSelectedValue();
+    }
+
+    // TODO: See these two functions below? They could be one with passing the
+    // jList as a parameter!
+
+    /**
+     * When creating the window for tag addition, we populate the sidebar with
+     * this function.
+     */
     public void populateTagList(Iterable<Tag> items){
-        // TODO: This is where I likely need to stick the GFX portions.
         DefaultListModel tagList = (DefaultListModel) jList1.getModel();
         for(Tag t: items){
             tagList.addElement(t.getName());
         }
     }
-
-    public void hideAddDataDialogBox(){
-        jDialog2.setVisible(false);
-    }
-//END ADD DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
-    
-    
-    
-//ADD TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public String getNewTagName(){
-        String Name = jTextField3.getText();
-        return Name;
-    }
-    public void showAddTagDialogBox(){
-        jDialog3.setVisible(true);
-    }
-    public void hideAddTagDialogBox(){
-        jDialog3.setVisible(false);
-    }
-//END ADD TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
-
-    
-    
-/**
- * Return the selected Data that is on the Table.
- */
-public Data selectedData(){
-    int selectedRowIndex = jTable1.getSelectedRow();
-    // We should be able to reconstruct the Data object from the table.
-    String name = (String) jTable1.getValueAt(selectedRowIndex, 0);
-    String PATH = (String) jTable1.getValueAt(selectedRowIndex, 1);
-    return new Data(name, PATH);
-}
-
-    
-//DELETE TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public void deleteSelectedTag(String Name){
-        for (int i = 0; i < jTable1.getRowCount(); i++){
-            if((jTable1.getValueAt(i, 2)).toString().contains(Name)){
-                jTable1.setValueAt((jTable1.getValueAt(i, 2)).toString().replace(Name, ""), i, 2);
-            }
-        }
-    }
-    public String getDeletedTagName(){
-        String Tag = jList2.getSelectedValue();
-        return Tag;
-    }
-    
+   
+    /**
+     * When creating the window for tag deletion, we populate the sidebar with this
+     * function.
+     */
     public void populateTagDeleteList(Iterable<Tag> items){
         DefaultListModel tagList = (DefaultListModel) jList2.getModel();
         for(Tag t: items){
             tagList.addElement(t.getName());
         }
     }
+
+    /**
+     * Offer up the DialogBox that presents the UI for adding tags.
+     */
+    public void showAddTagDialogBox(){
+        jDialog3.setVisible(true);
+    }
+
+    /**
+     * Hide the Dialog box that presents the UI for adding tags.
+     */
+    public void hideAddTagDialogBox(){
+        jDialog3.setVisible(false);
+    }
     
+    /**
+     * Offer up the DialogBox that presents the the UI for deleting tags.
+     */
     public void showDeleteTagDialogBox(){
         jDialog5.setVisible(true);
     }
+
+    /**
+     * Hide the Dialog box that presents the UI for deleting tags.
+     */
     public void hideDeleteTagDialogBox(){
         jDialog5.setVisible(false);
     }
-//END DELETE TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    
     
     /**
      * @param args the command line arguments
