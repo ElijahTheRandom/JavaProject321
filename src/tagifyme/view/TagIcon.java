@@ -48,10 +48,10 @@ public class TagIcon extends ImageIcon {
     int h = t.hashCode();
 
     // Compute four colors.
-    Color c1 = cList[(h >> 0) % cList.length];
-    Color c2 = cList[(h >> 1) % cList.length];
-    Color c3 = cList[(h >> 2) % cList.length];
-    Color c4 = cList[(h >> 3) % cList.length];
+    Color c1 = cList[java.lang.Math.abs((h >> 0)) % cList.length];
+    Color c2 = cList[java.lang.Math.abs((h >> 1)) % cList.length];
+    Color c3 = cList[java.lang.Math.abs((h >> 2)) % cList.length];
+    Color c4 = cList[java.lang.Math.abs((h >> 3)) % cList.length];
 
     int width  = getIconWidth();
     int height = getIconHeight();
