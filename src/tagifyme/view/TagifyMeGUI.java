@@ -610,6 +610,9 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
      */
     public void populateTagList(Iterable<Tag> items){
         DefaultListModel tagList = (DefaultListModel) jList1.getModel();
+        // TODO: This is *extremely* inefficient.
+        tagList.clear(); // We're repopulating the list, so clear it.
+
         for(Tag t: items){
             tagList.addElement(t.getName());
         }
@@ -621,6 +624,9 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
      */
     public void populateTagDeleteList(Iterable<Tag> items){
         DefaultListModel tagList = (DefaultListModel) jList2.getModel();
+        // TODO: This is *extremely* inefficient.
+        tagList.clear(); // We're repopulating the list, so clear it.
+        
         for(Tag t: items){
             tagList.addElement(t.getName());
         }
