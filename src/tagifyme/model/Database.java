@@ -112,6 +112,9 @@ public class Database implements Subject, Serializable {
    */
   public void addData(Data d) {
     this.data_set.add(d);
+
+    // Propagate these changes to the View.
+    this.notifyObservers();
   }
   
   /**
@@ -132,6 +135,9 @@ public class Database implements Subject, Serializable {
         this.relationship_set.remove(r);
       }
     }
+
+    // Propagate these changes to the view.
+    this.notifyObservers();
   }
   
   /**
@@ -215,23 +221,6 @@ public class Database implements Subject, Serializable {
         };
     }
     return new Tag("Undefined");
-  }
-  
-  /**
-   * Delete some Data from the Database by PATH.
-   */
-  public void deleteDataByPATH(String PATH) {
-    // TODO: I have no idea why you've chosen to delete
-    // via PATH; it's likely easier to do it with `name`
-    // only because there will be 'Set' contains type
-    // methods; but whatever.
-    for (Data d : data_set) {
-      if (d.getPATH().equals(PATH)) {
-        // TODO: Again, is there any risk to modifying the
-        // underlying structure while iterating over it?
-        this.deleteData(d);
-      }
-    }
   }
 
   /**

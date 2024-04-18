@@ -63,9 +63,6 @@ public class Controller {
                 theModel.addRelationship(new Relationship(d, pT));
                 pTName = pT.getName();
             }
-
-            // Propagate the changes to the model.
-            theView.addData(d.getName(), d.getPATH(), pTName);
         }
 
         /**
@@ -73,10 +70,7 @@ public class Controller {
          * that downward to the model.
          */
         private void handleDELETE_DATA() {
-            // TODO: It's likely that this should be renamed
-            // as a getter.
-            String nameToDelete = theView.deleteSelectedData();
-            theModel.deleteDataByPATH(nameToDelete);
+            theModel.deleteData(theView.selectedData());
         }
 
         /**
@@ -140,7 +134,7 @@ public class Controller {
                     handleDELETE_TAG();
                 }
             } catch (Exception exm) {
-                System.out.println(String.format("Controller error %S", exm.getMessage()));
+                System.out.println(String.format("%d: Controller error %S", System.currentTimeMillis(), exm.getMessage()));
             }
         }
     }

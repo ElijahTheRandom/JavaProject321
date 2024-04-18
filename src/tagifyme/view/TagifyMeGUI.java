@@ -462,6 +462,13 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     @Override
     public void update(Iterable<Pair<Data, Set<Tag>>> dI) {
+        // Clear the table.
+        // TODO: We're just dumping the entirety of the memory here; it'd
+        // be way more efficient to prune the differences, etc.
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        // Begin adding the data to the table.
         for (Pair<Data, Set<Tag>> dElem : dI) {
             List<String> tagNames = new ArrayList();
             for (Tag tElem : dElem.right()) {
@@ -478,23 +485,16 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         }
     }
     
-    public void removeData(String PATH){
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        for (int i=0; i < model.getRowCount(); i++){
-            if (((String)model.getValueAt(i, 1)).equals(PATH)) {
-                model.removeRow(i);
-                break;
-            }
-        }
-    }
-
     
-//ADD DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    /**
+     * Add some Data to the Table.
+     */
     public void addData(String name, String PATH, String tag){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Object[] row = {name, PATH, tag};
         model.addRow(row);
     }
+
     public String getDataPATH(){
         String PATH = file.getAbsolutePath();
         return PATH;
@@ -543,15 +543,16 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     
     
-    
-//DELETE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public String deleteSelectedData(){
-        int selectedRowIndex = jTable1.getSelectedRow();
-        String data = (String) jTable1.getValueAt(selectedRowIndex, 1);
-        removeData(data);
-        return data;
-    }
-//END DELETE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/**
+ * Return the selected Data that is on the Table.
+ */
+public Data selectedData(){
+    int selectedRowIndex = jTable1.getSelectedRow();
+    // We should be able to reconstruct the Data object from the table.
+    String name = (String) jTable1.getValueAt(selectedRowIndex, 0);
+    String PATH = (String) jTable1.getValueAt(selectedRowIndex, 1);
+    return new Data(name, PATH);
+}
 
     
 //DELETE TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
