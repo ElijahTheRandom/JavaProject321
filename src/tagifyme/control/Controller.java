@@ -100,8 +100,9 @@ public class Controller {
          */
         private void handleVIEW_DELETE_TAG_DIALOG() {
             // TODO: What to populate the list with? I don't
-            // think it should be `Strings`.
-            // theView.populateTagDeleteList(theModel.allTags());
+            // think it should be `Strings`. ERJ - 2024/4/18
+            // It shouldn't be Strings, but it's going to be Strings.
+            theView.populateTagDeleteList(theModel.allTags());
                         
             // Show the UI to the user.
             theView.showDeleteTagDialogBox();

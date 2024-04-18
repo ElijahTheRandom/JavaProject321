@@ -372,6 +372,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         );
 
         jList1.setCellRenderer(new TagCellRenderer());
+        jList2.setCellRenderer(new TagCellRenderer());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -571,10 +572,10 @@ public Data selectedData(){
         return Tag;
     }
     
-    public void populateTagDeleteList(String[] items){
+    public void populateTagDeleteList(Iterable<Tag> items){
         DefaultListModel tagList = (DefaultListModel) jList2.getModel();
-        for(String i: items){
-            tagList.addElement(i);
+        for(Tag t: items){
+            tagList.addElement(t.getName());
         }
     }
     
