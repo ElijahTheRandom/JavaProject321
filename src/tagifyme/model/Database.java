@@ -112,9 +112,6 @@ public class Database implements Subject, Serializable {
    */
   public void addData(Data d) {
     this.data_set.add(d);
-
-    // Propagate these changes to the View.
-    this.notifyObservers();
   }
   
   /**
@@ -135,9 +132,6 @@ public class Database implements Subject, Serializable {
         this.relationship_set.remove(r);
       }
     }
-
-    // Propagate these changes to the view.
-    this.notifyObservers();
   }
   
   /**

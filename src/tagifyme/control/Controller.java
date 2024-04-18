@@ -34,6 +34,12 @@ public class Controller {
     
     public class CalculateListener implements ActionListener {
 
+        // TODO: These "notifyObservers" code should be within
+        // the Database; the solution is coming to pieces when
+        // adding Data/Relationships seperately. I bet if you
+        // extend the Database class to have a method that handles
+        // both, you'll be fine.
+
         /**
          * Populate the UI with dialogs that allow for the
          * addition of data.
@@ -63,6 +69,10 @@ public class Controller {
                 theModel.addRelationship(new Relationship(d, pT));
                 pTName = pT.getName();
             }
+
+            // TODO: Should this go within the model code?
+            // Propagate the changes up to the model.
+            theModel.notifyObservers();
         }
 
         /**
@@ -71,6 +81,9 @@ public class Controller {
          */
         private void handleDELETE_DATA() {
             theModel.deleteData(theView.selectedData());
+            // TODO: Should this go within the model code?
+            // Propagate the changes up to the model.
+            theModel.notifyObservers();
         }
 
         /**
@@ -112,6 +125,10 @@ public class Controller {
         private void handleDELETE_TAG() {
             theView.hideDeleteTagDialogBox();
             theModel.deleteTag(new Tag(theView.getDeletedTagName()));
+
+            // TODO: Should this go within the model code?
+            // Propagate the changes up to the model.
+            theModel.notifyObservers();
         }
 
         @Override
