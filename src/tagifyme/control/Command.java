@@ -16,4 +16,6 @@ public class Command {
     public static String VIEW_DELETE_TAG_DIALOG = "VIEW_DELETE_TAG_DIALOG";
     public static String ADD_TAG = "ADD_TAG";
     public static String DELETE_TAG = "DELETE_TAG";
+    public static String SAVE = "SAVE";
+    public static String FILTER = "FILTER";
 };

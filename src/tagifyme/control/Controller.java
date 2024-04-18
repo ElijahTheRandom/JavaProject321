@@ -150,6 +150,10 @@ public class Controller {
                     handleVIEW_DELETE_TAG_DIALOG();
                 } else if (command.equals(Command.DELETE_TAG)) {
                     handleDELETE_TAG();
+                } else if (command.equals(Command.SAVE)) {
+                    // TODO: Handle Saving the Data.
+                } else if (command.equals(Command.FILTER)) {
+                    // TODO: Handle the filter.
                 }
             } catch (Exception exm) {
                 System.out.println(String.format("%d: Controller error %S", System.currentTimeMillis(), exm.getMessage()));
