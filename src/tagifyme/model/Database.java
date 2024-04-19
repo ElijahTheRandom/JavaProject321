@@ -1,3 +1,5 @@
+/** Core database class.
+ */
 package tagifyme.model;
 
 import java.util.Set;
@@ -9,33 +11,30 @@ import java.io.Serializable;
 
 import tagifyme.observer.Subject;
 import tagifyme.observer.Observer;
-
 import tagifyme.model.solver.Pair;
 
-// TODO: Abstract this later with inheritance, etc.
-
 /**
- * Base class of the Database
- * @author elijah
+ * A `Database` composes some `Data`, some `Tag`s, and some
+ * `Relationship`.
  */
 public class Database implements Subject, Serializable {
 
-  // Each of these are Sets to avoid duplication.
+  // Utilize `Set` classes to avoid duplication.
   private Set<Data> data_set;
   private Set<Tag> tag_set;
   private Set<Relationship> relationship_set;
-  private Tag noTag;
+
+  // Observer pattern requirements.
   private List<Observer> obs_list;
 
-    /**
-     *
-     */
+  /**
+   * Construct a Database with nothing in it.
+   */
   public Database() {
-    noTag = new Tag("Undefined");
     this.data_set = new HashSet<Data>();
     this.tag_set  = new HashSet<Tag>();
-    tag_set.add(noTag);
     this.relationship_set = new HashSet<Relationship>();
+
     this.obs_list = new ArrayList<Observer>();
   }
 
@@ -52,6 +51,13 @@ public class Database implements Subject, Serializable {
     this.relationship_set = r;
   }
 
+  /**
+   * Alternative constructor that allows for populating the `Database` with types from
+   * `Iterable`.
+   * @param dI An Optional iterable of Data.
+   * @param tI An Optional iterable of Tags.
+   * @param rI An Optional iterable of Relationships.
+   */
   public Database(Optional<Iterable<Data>> dI, Optional<Iterable<Tag>> tI, Optional<Iterable<Relationship>> rI) {
     this(); // Call the parameter-less constructor, initializing the sets.
 
@@ -67,6 +73,7 @@ public class Database implements Subject, Serializable {
       }
     }
 
+    // TODO: What to do if there's no Data, no Tags, but there are Relationships?
     if (rI.isPresent()) {
       for (Relationship elem : rI.get()) {
         this.relationship_set.add(elem);
@@ -75,31 +82,21 @@ public class Database implements Subject, Serializable {
   }
   
   /**
-   * Creates a tag
+   * Add a tag to the Database.
    * @param t Tag
    */
   public void addTag(Tag t) {
     this.tag_set.add(t);
   }
+
   /**
-   * Change the tag of some data.
-   * @param d Data
-   * @param t New Tag
-   */
-  public void changeTag(Data d, Tag t) {
-    //TODO: Change tags of the data. Whether that be generating "new" data and
-    //deleting old data or something else of that nature
-  }
-  
-  /**
-   * Delete tag
+   * Delete a tag from the Database.
    * @param t Tag to delete
    */
   public void deleteTag(Tag t) {
     this.tag_set.remove(t); // Remove the tag from the set.
 
-    // If we're deleting a Tag, we need to delete the accompanying
-    // relationships.
+    // If we're deleting a Tag, we need to delete the accompanying relationships.
     for (Relationship r : this.relationship_set) {
       if (r.getTag().equals(t)) {
         // TODO: If we're deleting a tag, what's the risk of modifying the underlying
@@ -110,18 +107,16 @@ public class Database implements Subject, Serializable {
   }
   
   /**
-   * Add data to our data set
-   * @param d new Data
+   * Add Data to the Database.
+   * @param d Data.
    */
   public void addData(Data d) {
     this.data_set.add(d);
   }
   
-  // TODO: Does this take a Data (an object reference), or does it take
-  // an index into the data type that stores the relationship?
-  // Definitely should take a data object and we can work from there - elijah
   /**
    * Delete a piece of data.
+   * 
    * This will also delete its relationship to a tag.
    * @param d Data to delete
    */
@@ -140,7 +135,7 @@ public class Database implements Subject, Serializable {
   }
   
   /**
-   * Add a relationship between a tag and data.
+   * Add a Relationship into the Database.
    * @param rel new Relationship
    */
   public void addRelationship(Relationship r) {
@@ -148,7 +143,7 @@ public class Database implements Subject, Serializable {
   }
   
   /**
-   * Delete a relationship between a tag and data.
+   * Delete a Relationship from the Database.
    * @param rel Relationship to delete
    */
   public void deleteRelationship(Relationship r) {
@@ -156,7 +151,7 @@ public class Database implements Subject, Serializable {
   }
  
   /**
-   * Will load the database from a file
+   * Load a Database from a file.
    * @return a loaded Database
    * @throws Exception TODO
    */
@@ -166,23 +161,29 @@ public class Database implements Subject, Serializable {
   }
 
   /**
-   * Will write all information to the database.
+   * Write a Database to a file.
    */
   public void dumpDatabase() {
     // TODO: Write the database to disk.
   }
 
-  public void addObserver(Observer obs) {
-      this.obs_list.add(obs);
-  }
 
-  // TODO: This function is absolutely miserable.
-  public Iterable<Pair<Data, Set<Tag>>> data_and_tags() {
+  /**
+   * Offer up the Data and its associated Tags.
+   */
+  public Iterable<Pair<Data, Set<Tag>>> allData() {
+    // TODO: This function is absolutely miserable; at its current
+    // implementation, it iterates over the Relationship set multiple
+    // times. What should be done is the following.
+    // 1) Allocate some HashMap from `Data` -> `List<Tag>`.
+    // 2) Iterate over the `Relationship` set, populating the previously
+    // allocated HashMap.
+    // 3) Iterate over the `Data` set, adding all pieces of `Data` that
+    // don't have a `Relationship`.
+
     List<Pair<Data, Set<Tag>>> r = new ArrayList();
-
     for (Data d_elem: this.data_set) {
-      // find the set of tags associated with this element of
-      // data.
+      // find the set of tags associated with this element of data.
       Set<Tag> tags = new HashSet();
 
       for (Relationship r_elem : this.relationship_set) {
@@ -197,11 +198,15 @@ public class Database implements Subject, Serializable {
     return r;
   }
   
-  public Iterable<Tag> tags(){
+  /**
+   * Return the `Tag`s within the `Database`.
+   */
+  public Iterable<Tag> allTags(){
       return tag_set;
   }
-
   
+  // TODO: I don't know why this is needed.
+  // This might just be a `contains`?
   public Tag getTag(String name){
     int i = 0;
     for (Tag tag : tag_set ){
@@ -209,12 +214,23 @@ public class Database implements Subject, Serializable {
             return tag;
         };
     }
-    return noTag;
+    return new Tag("Undefined");
   }
-  
+
+  /**
+   * Notify all oberservers that the model has changed, offering up
+   * a list of all the `Data` and `Tags`.
+   */
   public void notifyObservers() {
     for (Observer obs: this.obs_list) {
-      obs.update(this.data_and_tags());
+      obs.update(this.allData());
     }
+  }
+
+  /**
+   * Add an Observer to listen for changes.
+   */
+  public void addObserver(Observer obs) {
+      this.obs_list.add(obs);
   }
 }

@@ -1,26 +1,20 @@
+/** Within the database `Data` serves as the primary element.
+ */
 package tagifyme.model;
-
 import java.io.Serializable;
 
-// TODO: At some point, this should change into an interface
-// or abstract class or something; at this point, the data is
-// stored within the class itself, but it's likely that we'd
-// like to point to objects on the network, the disk, whatever.
-
 /**
- * Base class for "data" within the Database
- * @author elijah
+ * A `Data` is some primary piece within the Database.
  */
-
 public class Data implements Comparable<Data>, Serializable {
   /** The identifier of the piece of data. */
   private final String name;
   private final String PATH;
 
   /**
-   * 
-   * @param name String name of file
-   * @param PATH String PATH of file
+   * Constructor to build a piece of Data.
+   * @param name String name of file.
+   * @param PATH String path of file.
    */
   public Data(String name, String PATH) {
     this.name = name;
@@ -71,11 +65,12 @@ public class Data implements Comparable<Data>, Serializable {
   public int hashCode() {
     return this.getName().hashCode();
   }
-/**
- * .equals() overload to compare data.
- * @param obj
- * @return 
- */
+
+  /**
+   * .equals() overload to compare data.
+   * @param obj
+   * @return 
+   */
   @Override
   public boolean equals(Object obj) {
     if (obj == null || obj.getClass() != this.getClass()) {

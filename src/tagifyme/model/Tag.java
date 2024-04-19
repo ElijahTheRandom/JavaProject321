@@ -1,32 +1,34 @@
+/* Within the database the 'Tag' is some sort of affinity
+ * to associate with data.
+ */
 package tagifyme.model;
-
 import java.io.Serializable;
 
 /**
- * Base class for a "tag" within the database.
- * @author ethan
+ * A `Tag` is some affinity attached to Data.
  */
 public class Tag implements Comparable<Tag>, Serializable {
   private final String name;
 
-/**
- * Construct a tag with a specific name.
- * @param name 
- */
+  /**
+   * Construct a tag with a specific name.
+   * @param name the identifier for the tag.
+   */
   public Tag(String name) {
     this.name = name;
   }
-/**
- * 
- * @return Returns name
- */
+
+  /**
+   * Return the name of the Tag.
+   * @return returns name
+   */
   public String getName() {
     return this.name;
   }
 
   /**
    * Compare this tag to another via the Comparable interface.
-     * @param other
+   * @param other the other tag to compare to.
    */
   @Override
   public int compareTo(Tag other) {
@@ -44,11 +46,12 @@ public class Tag implements Comparable<Tag>, Serializable {
   public int hashCode() {
     return this.getName().hashCode();
   }
-/**
- * .equals() overload for comparing tags
- * @param obj
- * @return Boolean of tag equivalency  
- */
+
+  /**
+   * An `.equals()` overload for comparing tags.
+   * @param obj other object to compare to.
+   * @return boolean of tag equivalency  
+   */
   @Override
   public boolean equals(Object obj) {
     if (obj == null || obj.getClass() != this.getClass()) {

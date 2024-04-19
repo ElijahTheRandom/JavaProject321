@@ -1,6 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+/**
+ * The main UI element.
+ * When designing we had mainly focused on the Database model as it's
+ * less tightly coupled than the UI, which is tightly coupled to Swing
+ * (and none of us had used Swing before!).
  */
 package tagifyme.view;
 
@@ -11,6 +13,7 @@ import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.ListModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.border.EmptyBorder;
 
 import tagifyme.observer.Observer;
 import tagifyme.model.Data;
@@ -21,8 +24,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- *
- * @author ethan
+ * The main UI element.
  */
 public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable<Pair<Data, Set<Tag>>>> {
 
@@ -55,11 +57,16 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         jTextField3 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jDialog5 = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jButton9 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addDataButton = new javax.swing.JButton();
+        addTagButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -97,6 +104,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         jLabel2.setText("Add Data");
 
         jButton7.setText("Complete");
+        jButton7.setActionCommand("ADD_DATA");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -166,7 +174,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         });
 
         jButton8.setText("Add Tag");
-        jButton8.setActionCommand("ADD TAG");
+        jButton8.setActionCommand("ADD_TAG");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -201,6 +209,47 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
                 .addGap(44, 44, 44))
         );
 
+        jList2.setModel(new DefaultListModel<>());
+        jScrollPane3.setViewportView(jList2);
+
+        jButton9.setText("DELETE TAG");
+        jButton9.setActionCommand("DELETE_TAG");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setText("DELETE TAG");
+
+        javax.swing.GroupLayout jDialog5Layout = new javax.swing.GroupLayout(jDialog5.getContentPane());
+        jDialog5.getContentPane().setLayout(jDialog5Layout);
+        jDialog5Layout.setHorizontalGroup(
+            jDialog5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addGroup(jDialog5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog5Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel4))
+                    .addGroup(jDialog5Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jButton9)))
+                .addGap(36, 36, 36))
+        );
+        jDialog5Layout.setVerticalGroup(
+            jDialog5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog5Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addComponent(jButton9)
+                .addGap(89, 89, 89))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -230,21 +279,24 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Add Data");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addDataButton.setText("Add Data");
+        addDataButton.setActionCommand("VIEW_ADD_DATA_DIALOG");
+        addDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addDataButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Add Tag");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        addTagButton.setText("Add Tag");
+        addTagButton.setActionCommand("VIEW_ADD_TAG_DIALOG");
+        addTagButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                addTagButtonActionPerformed(evt);
             }
         });
 
         jButton3.setText("Delete Data");
+        jButton3.setActionCommand("DELETE_DATA");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -252,20 +304,22 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         });
 
         jButton4.setText("Delete Tag");
+        jButton4.setActionCommand("VIEW_DELETE_TAG_DIALOG");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Sort");
+        jButton5.setText("Filter");
+        jButton5.setActionCommand("FILTER");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        jTextField1.setText("Search...");
+        jTextField1.setText("Enter Tag Names");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -273,9 +327,9 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jButton1)
+                .addComponent(addDataButton)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(addTagButton)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
@@ -291,8 +345,8 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(addDataButton)
+                    .addComponent(addTagButton)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5)
@@ -322,13 +376,13 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addDataButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void addTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTagButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_addTagButtonActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -351,7 +405,6 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
         JFileChooser fileChooser = new JFileChooser();
         int option = fileChooser.showOpenDialog(jDialog1);
         if(option == JFileChooser.APPROVE_OPTION){
@@ -370,38 +423,88 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    
-    
-    //ADDING ACTION LISTENERS! These will be used by the controller
-    //to catch events (when button will be pressed)
-    public void addDataButton(ActionListener addData) {
-            jButton1.addActionListener(addData);
-            jDialog2.setSize(jDialog2.getPreferredSize());
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
 
+    
+    // TODO: Can this ActionListener code be private?
+    
+    /**
+     * Action listener code associating addData with the AddData button.
+     */
+    public void addDataButton(ActionListener addData) {
+            addDataButton.addActionListener(addData);
+            jDialog2.setSize(jDialog2.getPreferredSize());
+            jList1.setCellRenderer(new TagCellRenderer());
     }
     
+    /**
+     * Action listener code associating addTag with the AddTag button.
+     */
     public void addTagButton(ActionListener addTag) {
-            jButton2.addActionListener(addTag);
+            addTagButton.addActionListener(addTag);
             jDialog3.setSize(jDialog3.getPreferredSize());
     }
+
+    /**
+     * Action listener code associating deleteData with the DeleteData button.
+     */
     public void deleteDataButton(ActionListener deleteDataButton) {
             jButton3.addActionListener(deleteDataButton);
     }
+
+    /**
+     * Action listener code associating deleteTag with the DeleteTag button.
+     */
     public void deleteTagButton(ActionListener deleteTagButton) {
             jButton4.addActionListener(deleteTagButton);
+            jDialog5.setSize(jDialog2.getPreferredSize());
+            jList2.setCellRenderer(new TagCellRenderer());
     }
-    public void sortButton(ActionListener sortButton) {
-            jButton4.addActionListener(sortButton);
+
+    /**
+     * Action listener code associating sort with the filterButton.
+     */
+    public void sortButton(ActionListener filterButton) {
+            jButton5.addActionListener(filterButton);
     }
+
+    /**
+     * Action listener code the fileDialog with the fileDialogButton.
+     */
     public void fileDialogButton(ActionListener fileDialogButton) {
             jButton7.addActionListener(fileDialogButton);
     }
+
+    /**
+     * Action listener code associating confirmTag with the confirmTagButton.
+     */
     public void confirmTagButton(ActionListener confirmTagButton){
             jButton8.addActionListener(confirmTagButton);
     }
 
+    /**
+     * Action listener code associating confirmDelete with the confirmDeleteTagButton.
+     */
+    public void confirmDeleteTagButton(ActionListener confirmDeleteTagButton){
+            jButton9.addActionListener(confirmDeleteTagButton);
+    }
+   
+    /**
+     * The observer method, where we've been passed an Update which contains
+     * all of the <Data, Set<Tag>> pairs of the model.
+     * Update the required elements on the UI screen.
+     */
     @Override
     public void update(Iterable<Pair<Data, Set<Tag>>> dI) {
+        // Clear the table.
+        // TODO: We're just dumping the entirety of the memory here; it'd
+        // be way more efficient to prune the differences, etc.
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();;
+        model.setRowCount(0);
+
+        // Begin adding the data to the table.
         for (Pair<Data, Set<Tag>> dElem : dI) {
             List<String> tagNames = new ArrayList();
             for (Tag tElem : dElem.right()) {
@@ -418,85 +521,153 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         }
     }
     
-    public void removeData(String PATH){
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        for (int i=0; i < model.getRowCount(); i++){
-            if (((String)model.getValueAt(i, 1)).equals(PATH)) {
-                model.removeRow(i);
-            }
-        }
-    }
-
-    
-//ADD DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    /**
+     * Add some Data to the Table.
+     */
     public void addData(String name, String PATH, String tag){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Object[] row = {name, PATH, tag};
         model.addRow(row);
     }
+
+    /**
+     * Return the filePath to be associated with the new Data.
+     */
     public String getDataPATH(){
         String PATH = file.getAbsolutePath();
         return PATH;
     }
+
+    /**
+     * Return the name for the Data to be added.
+     */
     public String getDataName(){
-        String Name = jTextField2.getText();
-        return Name;
+        return jTextField2.getText();
     }
+
+    /**
+     * Return the Tag name selected for adding data.
+     */
     public String getTagName(){
-        String Tag = jList1.getSelectedValue();
-        return Tag;
+        // TODO: Again, this could have been Tag. Not a big
+        // deal, but it's better from a design perspective.
+        return jList1.getSelectedValue();
     }
+
+    /**
+     * Offer up the DialogBox that presents the UI for adding data.
+     */
     public void showAddDataDialogBox(){
         jDialog2.setVisible(true);
     }
-    public void populateTagList(String[] items){
-        DefaultListModel tagList = (DefaultListModel) jList1.getModel();
-        for(String i: items){
-            tagList.addElement(i);
-        }
-    }
+
+    /**
+     * Hide the Dialog box that presents the UI for adding data.
+     */
     public void hideAddDataDialogBox(){
         jDialog2.setVisible(false);
     }
-//END ADD DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     
-    
-    
-    
-//ADD TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public String getNewTagName(){
-        String Name = jTextField3.getText();
-        return Name;
-    }
-    public void showAddTagDialogBox(){
-        jDialog3.setVisible(true);
-    }
-    public void hideAddTagDialogBox(){
-        jDialog3.setVisible(false);
-    }
-//END ADD TAG CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
-
-    
-    
-    
-/*REMOVE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public String deleteSelectedData(){
+    /**
+     * Return the selected Data that is currently selected on the Table.
+     */
+    public Data selectedData() {
         int selectedRowIndex = jTable1.getSelectedRow();
-        
-        ListModel lModel= jList1.getModel();
-        Favorite item = (Favorite)lModel.getElementAt(selectedIndex);
-        System.out.println("name= "+ item.getName());
+
+        // If there's nothing selected, return null.
+        if (selectedRowIndex == -1) {
+            return null;
+        }
+        // We should be able to reconstruct the Data object from the table.
+        // TODO: At some level, this should just be the straight Data object
+        // with a CustomCellRenderer.
+        String name = (String) jTable1.getValueAt(selectedRowIndex, 0);
+        String PATH = (String) jTable1.getValueAt(selectedRowIndex, 1);
+        return new Data(name, PATH);
     }
+
+    /**
+     * Return the input for the filter field.
+     */
+    public String getFilterField() {
+        return jTextField1.getText();
+    }
+
+    /**
+     * Return the name of the Tag that is to be added.
+     */
+    public String getNewTagName(){
+        return jTextField3.getText();
+    }
+
+    /**
+     * Return the name of the Tag that is selected.
+     */
+    public String getDeletedTagName(){
+        // TODO: The jList2 is populated with Strings compared to Tags.
+        // It's likely better to have it populated with Tags, but that's a
+        // decently large refactor that doesn't add any features...
+        return jList2.getSelectedValue();
+    }
+
+    // TODO: See these two functions below? They could be one with passing the
+    // jList as a parameter!
+
+    /**
+     * When creating the window for tag addition, we populate the sidebar with
+     * this function.
+     */
+    public void populateTagList(Iterable<Tag> items){
+        DefaultListModel tagList = (DefaultListModel) jList1.getModel();
+        // TODO: This is *extremely* inefficient.
+        tagList.clear(); // We're repopulating the list, so clear it.
+
+        for(Tag t: items){
+            tagList.addElement(t.getName());
+        }
+    }
+   
+    /**
+     * When creating the window for tag deletion, we populate the sidebar with this
+     * function.
+     */
+    public void populateTagDeleteList(Iterable<Tag> items){
+        DefaultListModel tagList = (DefaultListModel) jList2.getModel();
+        // TODO: This is *extremely* inefficient.
+        tagList.clear(); // We're repopulating the list, so clear it.
+        
+        for(Tag t: items){
+            tagList.addElement(t.getName());
+        }
+    }
+
+    /**
+     * Offer up the DialogBox that presents the UI for adding tags.
+     */
     public void showAddTagDialogBox(){
         jDialog3.setVisible(true);
     }
+
+    /**
+     * Hide the Dialog box that presents the UI for adding tags.
+     */
     public void hideAddTagDialogBox(){
         jDialog3.setVisible(false);
     }
-//END REMOVE DATA CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-*/
     
+    /**
+     * Offer up the DialogBox that presents the the UI for deleting tags.
+     */
+    public void showDeleteTagDialogBox(){
+        jDialog5.setVisible(true);
+    }
+
+    /**
+     * Hide the Dialog box that presents the UI for deleting tags.
+     */
+    public void hideDeleteTagDialogBox(){
+        jDialog5.setVisible(false);
+    }
     
     /**
      * @param args the command line arguments
@@ -535,24 +706,29 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     private File file;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton addDataButton;
+    private javax.swing.JButton addTagButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JDialog jDialog3;
+    private javax.swing.JDialog jDialog5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
