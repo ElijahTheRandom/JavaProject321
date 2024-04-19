@@ -574,8 +574,13 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     /**
      * Return the selected Data that is currently selected on the Table.
      */
-    public Data selectedData(){
+    public Data selectedData() {
         int selectedRowIndex = jTable1.getSelectedRow();
+
+        // If there's nothing selected, return null.
+        if (selectedRowIndex == null) {
+            return null;
+        }
         // We should be able to reconstruct the Data object from the table.
         // TODO: At some level, this should just be the straight Data object
         // with a CustomCellRenderer.

@@ -80,10 +80,14 @@ public class Controller {
          * that downward to the model.
          */
         private void handleDELETE_DATA() {
-            theModel.deleteData(theView.selectedData());
-            // TODO: Should this go within the model code?
-            // Propagate the changes up to the model.
-            theModel.notifyObservers();
+            Data d = theView.selectedData(); // This can return null.
+
+            if (d != null) {
+                theModel.deleteData(theView.selectedData());
+                // TODO: Should this go within the model code?
+                // Propagate the changes up to the model.
+                theModel.notifyObservers();
+            }
         }
 
         /**
@@ -132,6 +136,15 @@ public class Controller {
             theModel.notifyObservers();
         }
 
+        /**
+         * The user has attempted to input something into the filter,
+         * Attempt to filter for it.
+         */
+        private void handle_FILTER() {
+            System.out.println("HELLO!");
+            System.out.println(theView.getFilterField());
+        }
+
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -153,7 +166,7 @@ public class Controller {
                 } else if (command.equals(Command.SAVE)) {
                     // TODO: Handle Saving the Data.
                 } else if (command.equals(Command.FILTER)) {
-                    // TODO: Handle the filter.
+                    handle_FILTER();
                 }
             } catch (Exception exm) {
                 System.out.println(String.format("%d: Controller error %S", System.currentTimeMillis(), exm.getMessage()));
