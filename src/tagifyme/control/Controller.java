@@ -141,7 +141,6 @@ public class Controller {
          * Attempt to filter for it.
          */
         private void handle_FILTER() {
-            System.out.println("HELLO!");
             System.out.println(theView.getFilterField());
         }
 

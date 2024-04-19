@@ -311,7 +311,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
             }
         });
 
-        jButton5.setText("Sort");
+        jButton5.setText("Filter");
         jButton5.setActionCommand("FILTER");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -319,7 +319,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
             }
         });
 
-        jTextField1.setText("Search...");
+        jTextField1.setText("Enter Tag Names");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -372,9 +372,6 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        jList1.setCellRenderer(new TagCellRenderer());
-        jList2.setCellRenderer(new TagCellRenderer());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -439,6 +436,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     public void addDataButton(ActionListener addData) {
             addDataButton.addActionListener(addData);
             jDialog2.setSize(jDialog2.getPreferredSize());
+            jList1.setCellRenderer(new TagCellRenderer());
     }
     
     /**
@@ -462,14 +460,14 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     public void deleteTagButton(ActionListener deleteTagButton) {
             jButton4.addActionListener(deleteTagButton);
             jDialog5.setSize(jDialog2.getPreferredSize());
-
+            jList2.setCellRenderer(new TagCellRenderer());
     }
 
     /**
-     * Action listener code associating sort with the SortButton.
+     * Action listener code associating sort with the filterButton.
      */
-    public void sortButton(ActionListener sortButton) {
-            jButton4.addActionListener(sortButton);
+    public void sortButton(ActionListener filterButton) {
+            jButton5.addActionListener(filterButton);
     }
 
     /**
@@ -522,7 +520,6 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
             this.addData(dElem.left().getName(), dElem.left().getPATH(), tName);
         }
     }
-    
     
     /**
      * Add some Data to the Table.
@@ -578,7 +575,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         int selectedRowIndex = jTable1.getSelectedRow();
 
         // If there's nothing selected, return null.
-        if (selectedRowIndex == null) {
+        if (selectedRowIndex == -1) {
             return null;
         }
         // We should be able to reconstruct the Data object from the table.
@@ -587,6 +584,13 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
         String name = (String) jTable1.getValueAt(selectedRowIndex, 0);
         String PATH = (String) jTable1.getValueAt(selectedRowIndex, 1);
         return new Data(name, PATH);
+    }
+
+    /**
+     * Return the input for the filter field.
+     */
+    public String getFilterField() {
+        return jTextField1.getText();
     }
 
     /**

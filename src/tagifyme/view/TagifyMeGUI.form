@@ -442,7 +442,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sort"/>
+            <Property name="text" type="java.lang.String" value="Filter"/>
+            <Property name="actionCommand" type="java.lang.String" value="FILTER"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
@@ -450,7 +451,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Search..."/>
+            <Property name="text" type="java.lang.String" value="Enter Tag Names"/>
           </Properties>
         </Component>
       </SubComponents>
