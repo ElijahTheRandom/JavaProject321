@@ -490,10 +490,10 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     }
 
     /**
-     * Action listener code associating sort with the filterButton.
+     * Action listener code associating sort with the saveButton.
      */
-    public void saveButton(ActionListener filterButton) {
-            jButton9.addActionListener(filterButton);
+    public void saveButton(ActionListener saveButton) {
+            jButton1.addActionListener(saveButton);
     }
     
     /**
