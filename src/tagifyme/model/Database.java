@@ -25,7 +25,7 @@ public class Database implements Subject, Serializable {
   private Set<Relationship> relationship_set;
 
   // Observer pattern requirements.
-  private List<Observer> obs_list;
+  private transient List<Observer> obs_list;
 
   /**
    * Construct a Database with nothing in it.

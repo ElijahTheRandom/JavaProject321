@@ -1,6 +1,9 @@
 package tagifyme.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import tagifyme.model.Data;
 import tagifyme.view.TagifyMeGUI;
 import tagifyme.model.Database;
@@ -151,7 +154,18 @@ public class Controller {
          * Save the database
          */
         private void handle_SAVE() {
-            //persistence save stuff
+            String filepath = String.format("%s/file.bin", System.getProperty("user.home"));
+            System.out.println(filepath);
+            
+            try (FileOutputStream fos = new FileOutputStream(filepath);
+            ObjectOutputStream out = new ObjectOutputStream(fos))
+            {
+                out.writeObject(theModel);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
         
         @Override
@@ -176,6 +190,8 @@ public class Controller {
                     handle_SAVE();
                 } else if (command.equals(Command.FILTER)) {
                     handle_FILTER();
+                } else {
+                    System.out.println(command);
                 }
             } catch (Exception exm) {
                 System.out.println(String.format("%d: Controller error %S", System.currentTimeMillis(), exm.getMessage()));
