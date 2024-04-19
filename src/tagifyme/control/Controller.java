@@ -30,6 +30,8 @@ public class Controller {
         this.theView.fileDialogButton(new CalculateListener());
         this.theView.confirmTagButton(new CalculateListener());
         this.theView.confirmDeleteTagButton(new CalculateListener());
+        this.theView.saveButton(new CalculateListener());
+
     }
     
     public class CalculateListener implements ActionListener {
@@ -144,6 +146,14 @@ public class Controller {
             System.out.println(theView.getFilterField());
         }
 
+        
+        /**
+         * Save the database
+         */
+        private void handle_SAVE() {
+            //persistence save stuff
+        }
+        
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
@@ -163,7 +173,7 @@ public class Controller {
                 } else if (command.equals(Command.DELETE_TAG)) {
                     handleDELETE_TAG();
                 } else if (command.equals(Command.SAVE)) {
-                    // TODO: Handle Saving the Data.
+                    handle_SAVE();
                 } else if (command.equals(Command.FILTER)) {
                     handle_FILTER();
                 }
