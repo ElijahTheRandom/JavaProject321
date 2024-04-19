@@ -170,6 +170,7 @@ public class Database implements Subject, Serializable {
 
   /**
    * Offer up the Data and its associated Tags.
+   * @return Iterable of tags and data connected
    */
   public Iterable<Pair<Data, Set<Tag>>> allData() {
     // TODO: This function is absolutely miserable; at its current

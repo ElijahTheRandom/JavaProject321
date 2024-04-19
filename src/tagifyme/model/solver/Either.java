@@ -5,7 +5,11 @@ import java.util.Optional;
 public class Either<L, R> {
   private final Optional<L> left;
   private final Optional<R> right;
-
+/**
+ * Constructor to set the default Either settings
+ * @param left left side of a set
+ * @param right right side of a set
+ */
   private Either(Optional<L> left, Optional<R> right) {
     this.left  = left;
     this.right = right;

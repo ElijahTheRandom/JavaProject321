@@ -16,6 +16,12 @@ public class Controller {
     private final TagifyMeGUI theView;
     private final Database theModel;
     
+    /**
+     * Default constructor for Controller
+     * @param theView an instance of the GUI 
+     * @param theModel an instance of the Database
+     */
+    
     public Controller(TagifyMeGUI theView, Database theModel) {
         this.theView = theView;
         this.theModel = theModel;
@@ -153,7 +159,11 @@ public class Controller {
         private void handle_SAVE() {
             //persistence save stuff
         }
-        
+        /**
+         * Receives commands from the view to do the respective
+         * command's actions.
+         * @param e ActionEvent 
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             try {

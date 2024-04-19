@@ -5,7 +5,7 @@ import java.util.HashSet;
 import tagifyme.model.Tag;
 
 /**
- * A Parser that expects the Tags to be comma seperated values.
+ * A Parser that expects the Tags to be comma separated values.
  */
 public class CSVParser {
 

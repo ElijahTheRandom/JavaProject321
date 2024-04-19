@@ -15,6 +15,15 @@ public class TagCellRenderer extends DefaultListCellRenderer {
     super();
   }
 
+  /**
+   * Function that will allow for the rendering of TagIcon
+   * @param list JList 
+   * @param value Object
+   * @param index int
+   * @param isSelected boolean
+   * @param cellHasFocus boolean
+   * @return a label with a picture attached
+   */
   @Override
   public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
     JLabel label = (JLabel) super.getListCellRendererComponent(
