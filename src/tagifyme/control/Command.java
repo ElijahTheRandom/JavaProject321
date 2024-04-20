@@ -3,6 +3,7 @@ package tagifyme.control;
 /**
  * Mapping between variable names to strings that are useful
  * when button mashing.
+ * @author team 8
  */
 public class Command {
     // TODO: I'd prefer to use an Enum, but see

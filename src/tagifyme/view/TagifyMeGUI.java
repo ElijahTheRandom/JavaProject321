@@ -3,6 +3,7 @@
  * When designing we had mainly focused on the Database model as it's
  * less tightly coupled than the UI, which is tightly coupled to Swing
  * (and none of us had used Swing before!).
+ * @author team 8
  */
 package tagifyme.view;
 
@@ -451,6 +452,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     
     /**
      * Action listener code associating addData with the AddData button.
+     * @param addData ActionListener
      */
     public void addDataButton(ActionListener addData) {
             addDataButton.addActionListener(addData);
@@ -460,6 +462,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     
     /**
      * Action listener code associating addTag with the AddTag button.
+     * @param addTag ActionListener
      */
     public void addTagButton(ActionListener addTag) {
             addTagButton.addActionListener(addTag);
@@ -468,6 +471,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Action listener code associating deleteData with the DeleteData button.
+     * @param deleteData ActionListener
      */
     public void deleteDataButton(ActionListener deleteDataButton) {
             jButton3.addActionListener(deleteDataButton);
@@ -475,6 +479,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Action listener code associating deleteTag with the DeleteTag button.
+     * @param deleteTagButton ActionListener
      */
     public void deleteTagButton(ActionListener deleteTagButton) {
             jButton4.addActionListener(deleteTagButton);
@@ -484,6 +489,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Action listener code associating sort with the filterButton.
+     * @param filterButton ActionListener
      */
     public void sortButton(ActionListener filterButton) {
             jButton5.addActionListener(filterButton);
@@ -491,6 +497,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Action listener code associating sort with the saveButton.
+     * @param saveButton ActionListener
      */
     public void saveButton(ActionListener saveButton) {
             jButton1.addActionListener(saveButton);
@@ -498,6 +505,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     
     /**
      * Action listener code the fileDialog with the fileDialogButton.
+     * @param fileDialogButton ActionListener
      */
     public void fileDialogButton(ActionListener fileDialogButton) {
             jButton7.addActionListener(fileDialogButton);
@@ -505,6 +513,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Action listener code associating confirmTag with the confirmTagButton.
+     * @param confirmTagButton ActionListener
      */
     public void confirmTagButton(ActionListener confirmTagButton){
             jButton8.addActionListener(confirmTagButton);
@@ -512,6 +521,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Action listener code associating confirmDelete with the confirmDeleteTagButton.
+     * @param confirmDeleteTagButton ActionListener
      */
     public void confirmDeleteTagButton(ActionListener confirmDeleteTagButton){
             jButton9.addActionListener(confirmDeleteTagButton);
@@ -521,6 +531,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
      * The observer method, where we've been passed an Update which contains
      * all of the <Data, Set<Tag>> pairs of the model.
      * Update the required elements on the UI screen.
+     * @param dI Iterable<Pair<Data, Set<Tag>>>
      */
     @Override
     public void update(Iterable<Pair<Data, Set<Tag>>> dI) {
@@ -549,6 +560,9 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     
     /**
      * Add some Data to the Table.
+     * @param name String data name
+     * @param PATH string path
+     * @param tag string tag name
      */
     public void addData(String name, String PATH, String tag){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -558,6 +572,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Return the filePath to be associated with the new Data.
+     * @return path string
      */
     public String getDataPATH(){
         String PATH = file.getAbsolutePath();
@@ -566,6 +581,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Return the name for the Data to be added.
+     * @return string data name
      */
     public String getDataName(){
         return jTextField2.getText();
@@ -573,6 +589,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Return the Tag name selected for adding data.
+     * @return string tag name
      */
     public String getTagName(){
         // TODO: Again, this could have been Tag. Not a big
@@ -596,6 +613,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     
     /**
      * Return the selected Data that is currently selected on the Table.
+     * @return data selected in the table
      */
     public Data selectedData() {
         int selectedRowIndex = jTable1.getSelectedRow();
@@ -614,6 +632,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Return the input for the filter field.
+     * @return filter string
      */
     public String getFilterField() {
         return jTextField1.getText();
@@ -621,6 +640,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Return the name of the Tag that is to be added.
+     * @return new tag name string
      */
     public String getNewTagName(){
         return jTextField3.getText();
@@ -628,6 +648,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
 
     /**
      * Return the name of the Tag that is selected.
+     * @return tag string to be deleted
      */
     public String getDeletedTagName(){
         // TODO: The jList2 is populated with Strings compared to Tags.
@@ -642,6 +663,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     /**
      * When creating the window for tag addition, we populate the sidebar with
      * this function.
+     * @param items Iterable<Tag> 
      */
     public void populateTagList(Iterable<Tag> items){
         DefaultListModel tagList = (DefaultListModel) jList1.getModel();
@@ -656,6 +678,7 @@ public class TagifyMeGUI extends javax.swing.JFrame implements Observer<Iterable
     /**
      * When creating the window for tag deletion, we populate the sidebar with this
      * function.
+     * @param items Iterable<Tag> 
      */
     public void populateTagDeleteList(Iterable<Tag> items){
         DefaultListModel tagList = (DefaultListModel) jList2.getModel();

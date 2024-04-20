@@ -24,6 +24,13 @@ public class TagIcon extends ImageIcon {
     this.t = t;
   }
 
+  /**
+   * Create the icon
+   * @param c Component
+   * @param g Graphics
+   * @param x int
+   * @param y int
+   */
   @Override
   public void paintIcon(Component c, Graphics g, int x, int y) {
     super.paintIcon(c, g, x, y);
@@ -31,11 +38,19 @@ public class TagIcon extends ImageIcon {
     computeImage(t, g2d);
   }
   
+  /**
+   * Getting the icon width
+   * @return 15
+   */
   @Override
   public int getIconWidth() {
     return 15;
   }
 
+  /**
+   * Getting the icon height
+   * @return 15
+   */
   @Override
   public int getIconHeight() {
     return 15;
@@ -43,6 +58,8 @@ public class TagIcon extends ImageIcon {
 
   /**
    * Compute an image from a passed `Tag` and the Graphics object.
+   * @param t Tag
+   * @param g2d Graphics2D
    */
   private void computeImage(Tag t, Graphics2D g2d) {
     int h = t.hashCode();

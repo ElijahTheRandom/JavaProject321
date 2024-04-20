@@ -12,6 +12,7 @@ import tagifyme.model.Tag;
 
 /**
  * Top-level Controller for MVC.
+ * @author team 8
  */
 public class Controller {
 
@@ -37,6 +38,9 @@ public class Controller {
 
     }
     
+    /**
+     * Class to handle model-view interactions
+     */
     public class CalculateListener implements ActionListener {
 
         // TODO: These "notifyObservers" code should be within
@@ -168,6 +172,11 @@ public class Controller {
             }
         }
         
+        /**
+         * Handles which of the actions will be preformed by the controller
+         * when the view is interacted with
+         * @param e ActionEvent
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             try {

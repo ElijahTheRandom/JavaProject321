@@ -15,6 +15,15 @@ public class TagCellRenderer extends DefaultListCellRenderer {
     super();
   }
 
+  /**
+   * Allows for the creation of unique icons to go beside tags
+   * @param list JList
+   * @param value Object
+   * @param index int
+   * @param isSelected boolean
+   * @param cellHasFocus boolean
+   * @return the new label with the image attached
+   */
   @Override
   public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
     JLabel label = (JLabel) super.getListCellRendererComponent(

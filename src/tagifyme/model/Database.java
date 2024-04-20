@@ -16,6 +16,7 @@ import tagifyme.model.solver.Pair;
 /**
  * A `Database` composes some `Data`, some `Tag`s, and some
  * `Relationship`.
+ * @author team 8
  */
 public class Database implements Subject, Serializable {
 
@@ -200,6 +201,7 @@ public class Database implements Subject, Serializable {
   
   /**
    * Return the `Tag`s within the `Database`.
+   * @return an iterable of all tags
    */
   public Iterable<Tag> allTags(){
       return tag_set;
@@ -207,6 +209,11 @@ public class Database implements Subject, Serializable {
   
   // TODO: I don't know why this is needed.
   // This might just be a `contains`?
+  /**
+   * 
+   * @param name String 
+   * @return the name of a specific tag in the list of tags
+   */
   public Tag getTag(String name){
     int i = 0;
     for (Tag tag : tag_set ){

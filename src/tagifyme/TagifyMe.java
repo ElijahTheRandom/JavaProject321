@@ -5,6 +5,11 @@ import tagifyme.control.Controller;
 import tagifyme.model.Database;
 import tagifyme.dummy.DummyData;
 
+/**
+ * Main file that combines all the other files into one
+ * operable unit
+ * @author team 8
+ */
 public class TagifyMe {
   public static void main(String[] args) {
     TagifyMeGUI theView = new TagifyMeGUI();

@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 /**
  * A `Relationship` associates some `Data` with a `Tag`.
+ * @author team 8
  */
 public class Relationship implements Serializable {
   // data_ref <-> tag_ref;

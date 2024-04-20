@@ -60,6 +60,7 @@ public class Data implements Comparable<Data>, Serializable {
   
   /**
    * Return the hashCode for this object.
+   * @return hashcode of this object
    */
   @Override
   public int hashCode() {
@@ -69,7 +70,7 @@ public class Data implements Comparable<Data>, Serializable {
   /**
    * .equals() overload to compare data.
    * @param obj
-   * @return 
+   * @return boolean of if equals
    */
   @Override
   public boolean equals(Object obj) {
