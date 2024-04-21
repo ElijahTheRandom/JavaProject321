@@ -150,24 +150,6 @@ public class Database implements Subject, Serializable {
   public void deleteRelationship(Relationship r) {
     this.relationship_set.remove(r);
   }
- 
-  /**
-   * Load a Database from a file.
-   * @return a loaded Database
-   * @throws Exception TODO
-   */
-  public static Database loadDatabase() throws Exception {
-    // TODO: Load a database from a file.
-    throw new Exception("TODO");
-  }
-
-  /**
-   * Write a Database to a file.
-   */
-  public void dumpDatabase() {
-    // TODO: Write the database to disk.
-  }
-
 
   /**
    * Offer up the Data and its associated Tags.
