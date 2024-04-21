@@ -158,8 +158,9 @@ public class Controller {
          * Save the database
          */
         private void handle_SAVE() {
-            String filepath = String.format("%s/file.bin", System.getProperty("user.home"));
-            System.out.println(filepath);
+            // TODO: This format string is somewhere else (see the main()); refactor
+            // it to put it somewhere else.
+            String filepath = String.format("%s/S2_T8/tagifyme.db", System.getProperty("user.home"));
             
             try (FileOutputStream fos = new FileOutputStream(filepath);
             ObjectOutputStream out = new ObjectOutputStream(fos))

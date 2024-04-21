@@ -238,6 +238,13 @@ public class Database implements Subject, Serializable {
    * Add an Observer to listen for changes.
    */
   public void addObserver(Observer obs) {
+      // When we're deserializing the object and loading from disk, this
+      // `obs_list` is not necessarily initialized (it's passed over because
+      // it's transient); initialize it if it doesn't exist.
+      if (this.obs_list == null) {
+        this.obs_list = new ArrayList<Observer>();
+      }
+
       this.obs_list.add(obs);
   }
 }
