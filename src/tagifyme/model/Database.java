@@ -247,7 +247,6 @@ public class Database implements Subject, Serializable {
     List<Pair<Data, Set<Tag>>> r = new ArrayList();
     for (Data d : hm.keySet()) {
       r.add(new Pair(d, hm.get(d)));
-      System.out.println(d.getName());
     }
 
     // Propagate up the model.
