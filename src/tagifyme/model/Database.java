@@ -98,13 +98,24 @@ public class Database implements Subject, Serializable {
     this.tag_set.remove(t); // Remove the tag from the set.
 
     // If we're deleting a Tag, we need to delete the accompanying relationships.
+    // To avoid a ConcurrentModificationException, find
+    // ALL of the relationships that need to be deleted, then delete them.
+
+    ArrayList<Relationship> toDelete = new ArrayList();
+
     for (Relationship r : this.relationship_set) {
       if (r.getTag().equals(t)) {
-        // TODO: If we're deleting a tag, what's the risk of modifying the underlying
-        // set we're iterating over?
-        this.relationship_set.remove(r);
+        toDelete.add(r);
       }
     }
+
+    // Now delete those that matched.
+    for (Relationship r : toDelete) {
+      this.relationship_set.remove(r);
+    }
+
+    // Propagate changes up to the view.
+    this.notifyObservers(this.allData());
   }
   
   /**
@@ -113,6 +124,9 @@ public class Database implements Subject, Serializable {
    */
   public void addData(Data d) {
     this.data_set.add(d);
+
+    // Propagate changes up to the view.
+    this.notifyObservers(this.allData());
   }
   
   /**
@@ -125,14 +139,24 @@ public class Database implements Subject, Serializable {
     this.data_set.remove(d); // Remove the data from the set.
 
     // If we're deleting data, we need to delete the accompanying
-    // relationships.
+    // relationships. To avoid a ConcurrentModificationException, find
+    // ALL of the relationships that need to be deleted, then delete them.
+  
+    ArrayList<Relationship> toDelete = new ArrayList();
+
     for (Relationship r : this.relationship_set) {
       if (r.getData().equals(d)) {
-        // TODO: If we're deleting data, what's the risk of modifying the underlying
-        // set we're iterating over?
-        this.relationship_set.remove(r);
+        toDelete.add(r);
       }
     }
+
+    // Now delete those that matched.
+    for (Relationship r : toDelete) {
+      this.relationship_set.remove(r);
+    }
+
+    // Propagate changes up to the view.
+    this.notifyObservers(this.allData());
   }
   
   /**
@@ -141,6 +165,9 @@ public class Database implements Subject, Serializable {
    */
   public void addRelationship(Relationship r) {
     this.relationship_set.add(r);
+
+    // Propagate changes up to the view.
+    this.notifyObservers(this.allData());
   }
   
   /**
@@ -149,6 +176,9 @@ public class Database implements Subject, Serializable {
    */
   public void deleteRelationship(Relationship r) {
     this.relationship_set.remove(r);
+
+    // Propagate changes up the view.
+    this.notifyObservers(this.allData());
   }
 
   /**
@@ -207,12 +237,13 @@ public class Database implements Subject, Serializable {
   }
 
   /**
-   * Notify all oberservers that the model has changed, offering up
+   * Notify all observers that the model has changed, offering up
    * a list of all the `Data` and `Tags`.
+   * @param d data to push upward to the view.
    */
-  public void notifyObservers() {
+  public void notifyObservers(Iterable<Pair<Data, Set<Tag>>> d) {
     for (Observer obs: this.obs_list) {
-      obs.update(this.allData());
+      obs.update(d);
     }
   }
 
@@ -228,5 +259,9 @@ public class Database implements Subject, Serializable {
       }
 
       this.obs_list.add(obs);
+
+      // We've added an observer, go ahead and update it with
+      // the table.
+      obs.update(this.allData());
   }
 }

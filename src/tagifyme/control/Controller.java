@@ -73,15 +73,13 @@ public class Controller {
             theModel.addData(d);
             // If we've selected a tag, add the appropriate relationship.
             Tag pT = theModel.getTag(theView.getTagName());
-            String pTName = "";
             if (pT != null) {
                 theModel.addRelationship(new Relationship(d, pT));
-                pTName = pT.getName();
             }
 
             // TODO: Should this go within the model code?
             // Propagate the changes up to the model.
-            theModel.notifyObservers();
+            // theModel.notifyObservers();
         }
 
         /**
@@ -95,7 +93,7 @@ public class Controller {
                 theModel.deleteData(theView.selectedData());
                 // TODO: Should this go within the model code?
                 // Propagate the changes up to the model.
-                theModel.notifyObservers();
+                // theModel.notifyObservers();
             }
         }
 
@@ -142,7 +140,7 @@ public class Controller {
 
             // TODO: Should this go within the model code?
             // Propagate the changes up to the model.
-            theModel.notifyObservers();
+            // theModel.notifyObservers();
         }
 
         /**
@@ -152,7 +150,6 @@ public class Controller {
         private void handle_FILTER() {
             System.out.println(theView.getFilterField());
         }
-
         
         /**
          * Save the database
@@ -204,9 +201,9 @@ public class Controller {
                     System.out.println(command);
                 }
             } catch (Exception exm) {
-                System.out.println(String.format("%d: Controller error %S", System.currentTimeMillis(), exm.getMessage()));
+                // System.out.println(String.format("%d: Controller error %S", System.currentTimeMillis(), exm.getMessage()));
+                exm.printStackTrace();
             }
         }
     }
 }
-
