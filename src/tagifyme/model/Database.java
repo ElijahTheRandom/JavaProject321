@@ -8,10 +8,12 @@ import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
+import java.util.HashMap;
 
 import tagifyme.observer.Subject;
 import tagifyme.observer.Observer;
 import tagifyme.model.solver.Pair;
+import tagifyme.model.solver.SimpleSolver;
 
 /**
  * A `Database` composes some `Data`, some `Tag`s, and some
@@ -194,6 +196,8 @@ public class Database implements Subject, Serializable {
     // 3) Iterate over the `Data` set, adding all pieces of `Data` that
     // don't have a `Relationship`.
 
+    // TODO: Should have used a HashMap!
+
     List<Pair<Data, Set<Tag>>> r = new ArrayList();
     for (Data d_elem: this.data_set) {
       // find the set of tags associated with this element of data.
@@ -210,6 +214,46 @@ public class Database implements Subject, Serializable {
 
     return r;
   }
+
+  // TODO: Major issues with this function and the above; the other is in the
+  // form of returning an iterable, and this one is notifying the observers!
+  // Some more thought, time, and most importantly care should have been
+  // thrown here.
+
+  /**
+   * Offer up the Data and associated tags that satisfy the constraints.
+   */
+  public void filteredData(Set<Tag> constraints) {
+    SimpleSolver solv = new SimpleSolver();
+    List<Relationship> satisfied = solv.filter(constraints, this.relationship_set);
+
+    HashMap<Data, Set<Tag>> hm = new HashMap();
+    for (Relationship r : satisfied) {
+      // If the Data doesn't exist within the HashMap yet, insert it.
+      // TODO: Holy smokes this is ugly! FIX
+      if (hm.get(r.getData()) == null) {
+        hm.put(r.getData(), new HashSet());
+        Set<Tag> hs = hm.get(r.getData());
+        hs.add(r.getTag());
+      } else {
+        Set<Tag> hs = hm.get(r.getData());
+        hs.add(r.getTag());
+      }
+    }
+
+    // Convert the HashMap into a Iterable<Pair<Data, Set<Tag>>> which
+    // should have been a HashMap!
+
+    List<Pair<Data, Set<Tag>>> r = new ArrayList();
+    for (Data d : hm.keySet()) {
+      r.add(new Pair(d, hm.get(d)));
+      System.out.println(d.getName());
+    }
+
+    // Propagate up the model.
+    this.notifyObservers(r);
+  }
+
   
   /**
    * Return the `Tag`s within the `Database`.

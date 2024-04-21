@@ -9,6 +9,7 @@ import tagifyme.view.TagifyMeGUI;
 import tagifyme.model.Database;
 import tagifyme.model.Relationship;
 import tagifyme.model.Tag;
+import tagifyme.model.solver.CSVParser;
 
 /**
  * Top-level Controller for MVC.
@@ -148,7 +149,12 @@ public class Controller {
          * Attempt to filter for it.
          */
         private void handle_FILTER() {
-            System.out.println(theView.getFilterField());
+            // If the filter field is empty, just reset.
+            if (theView.getFilterField().equals("")) {
+                theModel.notifyObservers(theModel.allData());
+            } else {
+                theModel.filteredData(CSVParser.parse(theView.getFilterField()));
+            }
         }
         
         /**
